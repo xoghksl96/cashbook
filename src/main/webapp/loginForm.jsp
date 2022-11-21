@@ -20,7 +20,7 @@
 		alert("<%=request.getParameter("msg")%>");
 <%	
 	}
-%>
+%>.
 </script>	
 
 <!-- Latest compiled and minified CSS -->

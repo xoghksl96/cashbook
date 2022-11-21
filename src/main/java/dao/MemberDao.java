@@ -41,8 +41,7 @@ public class MemberDao {
 		stmtLogin.close();
 		conn.close();
 		return null;
-	}
-	
+	}	
 	
 	// 회원가입 메서드
 	public Boolean insertMember(Member paramMember) throws Exception {

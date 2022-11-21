@@ -4,10 +4,13 @@ public class Cash {
 	private int cashNo;
 	// 
 	private int categoryNo; // FK -> INNER HOIN -> map타입
+	private String cashDate;
 	private long cashPrice;
 	private String cashMemo;
 	private String updatedate;
 	private String createdate;
+	
+	
 	public int getCashNo() {
 		return cashNo;
 	}
@@ -19,6 +22,12 @@ public class Cash {
 	}
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+	public String getCashDate() {
+		return cashDate;
+	}
+	public void setCashDate(String cashDate) {
+		this.cashDate = cashDate;
 	}
 	public long getCashPrice() {
 		return cashPrice;
