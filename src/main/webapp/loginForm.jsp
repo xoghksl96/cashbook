@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.net.URLEncoder" %>
 <%
 	// 로그인이 되어 있을때는 접근 불가
 	if(session.getAttribute("loginMember") != null) {
@@ -20,7 +21,7 @@
 		alert("<%=request.getParameter("msg")%>");
 <%	
 	}
-%>.
+%>
 </script>	
 
 <!-- Latest compiled and minified CSS -->
@@ -75,7 +76,7 @@
 			</table>
 			
 			<div>
-				<a type="button" href="<%=request.getContextPath()%>/insertEmpForm.jsp"><span class="text">회원가입</span></a>
+				<a type="button" href="<%=request.getContextPath()%>/insertMemberForm.jsp"><span class="text">회원가입</span></a>
 			</div>
 		</form>
 	</div>

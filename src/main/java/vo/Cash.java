@@ -4,6 +4,7 @@ public class Cash {
 	private int cashNo;
 	// 
 	private int categoryNo; // FK -> INNER HOIN -> map타입
+	private String memberId;
 	private String cashDate;
 	private long cashPrice;
 	private String cashMemo;
@@ -22,6 +23,12 @@ public class Cash {
 	}
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getCashDate() {
 		return cashDate;
@@ -52,7 +59,5 @@ public class Cash {
 	}
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
-	}
-	
-	
+	}	
 }

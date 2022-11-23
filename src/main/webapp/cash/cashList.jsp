@@ -1,19 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.net.*" %>
 <%@ page import="dao.*"%>
+<%@ page import="vo.*"%>
+
 <%
-	/* //Controller : session, request
+	// 한글처리
+	request.setCharacterEncoding("utf-8");
+	// 1. Controller : session, request
 	
-	// 1. 세션 확인 -> 로그인이 되어있지 않을때는 접근 불가
+	// 1-1 세션 확인 -> 로그인이 되어있지 않을때는 접근 불가
 	
 	if(session.getAttribute("loginMember") == null) {
+		String msg = URLEncoder.encode("로그인이 필요한 서비스입니다.","utf-8");
 		
-		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg"+msg);
 		return;
-	} */
+	}
 	
+	Member loginMember = (Member)session.getAttribute("loginMember");
 	
-	// 2. 년, 월  request 
+	// 1-2 년, 월  request 
 	int year = 0;
 	int month = 0;
 	
@@ -39,7 +46,7 @@
 		}
 	}
 	
-
+	String title = year + "년 " + (month+1) + "월 가계부";
 	// 출력하고자 하는 1일의 요일 (일 1, 월 2, 화 3, 수 4, 목 5, 금 6, 토 7)
 	Calendar targetDate = Calendar.getInstance();
 	targetDate.set(year, month, 1);
@@ -70,8 +77,7 @@
 	
 	// Model 호출 : 일별 cash 목록
 	CashDao cashDao = new CashDao();
-	ArrayList<HashMap<String, Object>> list = cashDao.slectCashListByMonth(year, month+1);
-	
+	ArrayList<HashMap<String, Object>> list = cashDao.slectCashListByMonth(loginMember.getMemberId(), year, month+1);
 	
 	// View : 달력 출력 + 일별 cash 목록
 %>
@@ -89,30 +95,61 @@
 <%	
 	}
 %>
-</script>	
+</script>
+
+<Style>
+	th {
+		width : 200px;
+		height : 120px;
+		font-size : 20px;
+	}
+	td {
+		width : 200px;
+		height : 200px;
+	}
+	.dateOuter {
+		width : 200px;
+		height : 200px;
+		top: 50%;
+	}
+	.dateInner {
+		width : 40px;
+		height : 40px;
+		top: 50%;
+	}
+</Style>	
 <title>cashList</title>
 </head>
 <body>
 	<div>
 		<!-- 로그인 정보 출력 (로그인 성공 시) -->
 		<!--  세션 안에 (loginMember 변수) 출력 -->
-		환영합니다.
+		<%=loginMember.getMemberName()%>님 환영합니다.
 	</div>
 	
 	<div>
-		<%=year%>년 <%=month+1%> 월
+		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">회원정보 수정</a>
+		<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호 수정</a>
 	</div>
 	
 	<div>
 		<table border="1">
+			
 			<tr>
+				<th><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a></th>
+				<th colspan="5"><%=title%></th>
+				<th><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a></th>
+			</tr>
+			
+			<tr>
+				<th style="color : red">일</th>	
 				<th>월</th>
 				<th>화</th>
 				<th>수</th>
 				<th>목</th>
 				<th>금</th>
-				<th>토</th>
-				<th>일</th>
+				<th style="color : blue">토</th>
 			</tr>
 			
 			<tr>
@@ -124,8 +161,27 @@
 					int date = i - beginBlank;
 					if(date > 0 && date <= lastDate) {
 		%>
-						 <%=date%>
-		<%	
+						<div class = "dateOuter">
+							<div class = "dateInner">
+								<a href="<%=request.getContextPath()%>/cash/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>" type="button"><span><%=date%></span></a>
+							</div>
+		<%				
+						for(HashMap<String, Object> m : list) {				
+							String cashDate = (String)(m.get("cashDate"));
+		 					if(Integer.parseInt(cashDate.substring(8)) == date) {
+		%>						
+								<div>
+									[<%=(String)m.get("categoryKind")%>]
+									<%=(String)m.get("categoryName")%>
+									<%=(Long)m.get("cashPrice")%>원
+								</div>
+		<%
+		 					}
+							
+						}
+		%>
+						</div>
+		<%
 					}
 		%>
 				</td>
@@ -139,27 +195,6 @@
 		%>
 			</tr>
 		</table>
-	</div>
-	
-	<div>
-		<%
-			for(HashMap<String, Object> m : list) {
-		%>
-				<div>
-					<%=(int)m.get("cashNo")%>
-					<%=(String)m.get("cashDate")%>
-					<%=(long)m.get("cashPrice")%>
-					<%=(int)m.get("categoryNo")%>
-					<%=(String)m.get("categoryKind")%>
-					<%=(String)m.get("categoryName")%>
-				</div>
-		<%
-			}
-		%>
-	</div>
-	
-	<div>
-		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
 	</div>
 </body>
 </html>

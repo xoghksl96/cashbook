@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="vo.*"%>
+<%@ page import="dao.*"%>
 <%
-	// 로그인이 되어 있을때는 접근 불가
-	if(session.getAttribute("loginMember") != null) {
-		String targetUrl = "/cash/cashList.jsp";
+	// 로그인이 되어 있지 않을 때 접근 불가
+	if(session.getAttribute("loginMember") == null) {
+		String targetUrl = "/loginForm.jsp";
 		response.sendRedirect(request.getContextPath()+targetUrl);
 		return;
 	}
+
+	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -44,42 +48,40 @@
 		width : 200px;
 	}
 </Style>
-<title>회원가입 페이지</title>
+<title>회원정보 수정 페이지</title>
 </head>
 <body>
 	<div class="container">
 	
 		<div class="p-5 bg-dark text-white text-center rounded">
-		  	<h1 class="titleText center">회원가입</h1> 
+		  	<h1 class="titleText center">회원정보 수정</h1> 
 		</div>
 		
 		<br>
 		
-		<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">
+		<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
 			<table class="table">
 				
 				<tr>
 					<th class="text center">ID</th>
-					<td class="text center"><input type="text" name="memberId"></td>
+					<!-- ID를 보여주지만, 수정불가 -->
+					<td class="text center"><input style="background-color : pink" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"></td>
 				</tr>
 				
 				<tr>
 					<th class="text center">PW</th>
+					<!-- 비밀번호를 입력하게끔 -->
 					<td class="text center"><input type="password" name="memberPw"></td>
 				</tr>
 				
 				<tr>
-					<th class="text center">PW CHECK</th>
-					<td class="text center"><input type="password" name="memberPwCheck"></td>
-				</tr>
-				
-				<tr>
 					<th class="text center">NAME</th>
-					<td class="text center"><input type="text" name="memberName"></td>
+					<!-- 현재 이름을 보여 주고 수정가능하게 끔 -->
+					<td class="text center"><input type="text" name="memberName" value="<%=loginMember.getMemberName()%>"></td>
 				</tr>
 				
 				<tr>
-					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">회원가입</span></button></th>
+					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">회원 정보수정</span></button></th>
 				</tr>
 				
 			</table>

@@ -5,6 +5,9 @@
 <%@ page import = "vo.*" %>
 <%@ page import = "dao.*" %>
 <%
+	//한글처리
+	request.setCharacterEncoding("utf-8");
+
 	// Controller
 	
 	// Form 으로 부터 입력받은 값이 null 또는 "" 일때
@@ -27,13 +30,12 @@
 
 	
 	// loginMember의 정보로 로그인 시도
-	MemberDao md = new MemberDao();
+	MemberDao memberDao = new MemberDao();
 	
-	if(md.login(loginMember) != null) { // 로그인에 성공 했을 시,
+	loginMember = memberDao.login(loginMember);
+	if(loginMember != null) { // 로그인에 성공 했을 시,
 		
 		// 세션에 로그인 정보 저장.
-		
-		loginMember = md.login(loginMember);
 		session.setAttribute("loginMember", loginMember);
 		
 		String msg = URLEncoder.encode("로그인 성공", "utf-8");
