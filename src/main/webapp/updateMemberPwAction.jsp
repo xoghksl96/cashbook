@@ -38,11 +38,12 @@
 	// 비밀번호 수정 전 newPw 와 newPwcheck이 일치하는 지 확인
 	if(memberDao.passwordCheck(newPw, newPwCheck)) { // 일치 -> 비밀번호 수정
 		
-		Member loginMember = memberDao.updateMemberPw(updateMember,newPw);
+		updateMember = memberDao.updateMemberPw(updateMember,newPw);
 	
-		if(loginMember != null) { // 비밀번호 수정에 성공 했을 시,
+		if(updateMember != null) { // 비밀번호 수정에 성공 했을 시,
 			
-			// 수정된 loginMember를 새로 세션에 넣기
+			// 수정된 updateMember 새로 세션에 넣기
+			Member loginMember = memberDao.login(updateMember);
 			session.setAttribute("loginMember", loginMember);
 			
 			String msg = URLEncoder.encode("비밀번호 수정 성공", "utf-8");

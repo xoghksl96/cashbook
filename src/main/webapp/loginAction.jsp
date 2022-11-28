@@ -23,25 +23,37 @@
 
 	// 분리된 Model 호출
 	
-	// loginForm으로부터 받아온 값을 loginMember에 저장.
+	MemberDao memberDao = new MemberDao();
 	Member loginMember = new Member();
+	
+	// loginForm으로부터 받아온 값을 loginMember에 저장.
 	loginMember.setMemberId(request.getParameter("memberId"));
 	loginMember.setMemberPw(request.getParameter("memberPw"));
 
 	
-	// loginMember의 정보로 로그인 시도
-	MemberDao memberDao = new MemberDao();
-	
+	// loginMember의 정보로 로그인 시도	
 	loginMember = memberDao.login(loginMember);
+	
+	
 	if(loginMember != null) { // 로그인에 성공 했을 시,
 		
 		// 세션에 로그인 정보 저장.
 		session.setAttribute("loginMember", loginMember);
-		
-		String msg = URLEncoder.encode("로그인 성공", "utf-8");
+	
+		String level = "고객 ";
+		String msg = "로그인 성공";
 		String targetUrl = "/cash/cashList.jsp";
-		response.sendRedirect(request.getContextPath()+targetUrl + "?msg="+msg);
-		return;
+		
+		if(loginMember.getMemberLevel() == 1) {	// 관리자 계정일 때
+			
+			level = "관리자 ";
+			targetUrl = "/admin/adminMain.jsp";
+
+		}
+			// 고객 계정일 때
+			msg = URLEncoder.encode(level + msg, "utf-8");
+			response.sendRedirect(request.getContextPath()+targetUrl + "?msg="+msg);
+			return;
 				
 	} else { // 로그인에 실패 했을 시, loginForm으로 강제이동
 		

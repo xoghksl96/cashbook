@@ -39,14 +39,14 @@
 	}
 	
 	// 회원 가입 전 ID중복 확인
-	if(memberDao.memberIdChech(insertMember.getMemberId())) { // 중복되는 ID가 DB에 존재할 경우
+	if(memberDao.memberIdCheck(insertMember.getMemberId())) { // 중복되는 ID가 DB에 존재할 경우 (true 반환 시)
 		
 		String msg = URLEncoder.encode("중복된 ID가 존재합니다.", "utf-8");
 		String targetUrl = "/insertMemberForm.jsp";
 		response.sendRedirect(request.getContextPath()+targetUrl + "?msg="+msg);
 		return;
 		
-	} else {	// 중복되는 ID가 DB에 존재하지 않을 경우 -> 회원가입 진행
+	} else {	// 중복되는 ID가 DB에 존재하지 않을 경우 (false 반환 시) -> 회원가입 진행
 		
 		if(memberDao.insertMember(insertMember)) { // 회원가입에 성공 했을 시,
 			

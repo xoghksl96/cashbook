@@ -7,7 +7,7 @@ import util.*;
 
 public class CashDao {
 	public ArrayList<HashMap<String, Object>> slectCashListByMonth(String memberId, int year, int month) throws Exception {
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
@@ -18,7 +18,10 @@ public class CashDao {
 		stmtSelect.setString(1, memberId);
 		stmtSelect.setInt(2,year);
 		stmtSelect.setInt(3,month);
+		
 		ResultSet rsSelect = stmtSelect.executeQuery();
+		
+
 		while(rsSelect.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			
@@ -31,17 +34,15 @@ public class CashDao {
 			m.put("categoryName", rsSelect.getString("categoryName"));
 			
 			// 리스트에 넣음
-			list.add(m);
+			resultList.add(m);
 		}
 		
-		rsSelect.close();
-		stmtSelect.close();
-		conn.close();
-		return list;		
+		dbUtil.close(rsSelect, stmtSelect, conn);
+		return resultList;		
 	}
 	
 	public ArrayList<HashMap<String, Object>> slectCashListByDate(String memberId, int year, int month, int date) throws Exception {
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		ArrayList<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
@@ -54,6 +55,7 @@ public class CashDao {
 		stmtSelect.setInt(3,month);
 		stmtSelect.setInt(4,date);
 		ResultSet rsSelect = stmtSelect.executeQuery();
+		
 		while(rsSelect.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			
@@ -67,16 +69,15 @@ public class CashDao {
 			m.put("cashMemo", rsSelect.getString("cashMemo"));
 			
 			// 리스트에 넣음
-			list.add(m);
+			resultList.add(m);
 		}
 		
-		rsSelect.close();
-		stmtSelect.close();
-		conn.close();
-		return list;		
+		dbUtil.close(rsSelect, stmtSelect, conn);
+		return resultList;		
 	}
 	
 	public Boolean insertCash(Cash cash) throws Exception {
+		boolean result = false;
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
@@ -89,21 +90,18 @@ public class CashDao {
 		
 		// 4. sql 실행, 결과에 따라 True false 반환
 		int row = stmtInsert.executeUpdate();
+		
 		if(row==1) {
-			stmtInsert.close();
-			conn.close();
-			
-			return true;
+			result = true;
 		}
 		
-		stmtInsert.close();
-		conn.close();
-		
-		return false;		
+		dbUtil.close(stmtInsert, conn);	
+		return result;		
 	}
 	
 	public Cash selectCashOne(String memberId, int cashNo) throws Exception {
-
+		Cash resultCash = null;
+		
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
@@ -116,7 +114,7 @@ public class CashDao {
 		
 		ResultSet rsSelect = stmtSelect.executeQuery();
 		
-		Cash resultCash = new Cash();
+		resultCash = new Cash();
 		if(rsSelect.next()) {
 			
 			resultCash = new Cash();
@@ -129,13 +127,12 @@ public class CashDao {
 			resultCash.setCashDate(rsSelect.getString("cashDate"));
 		}
 		
-		rsSelect.close();
-		stmtSelect.close();
-		conn.close();
+		dbUtil.close(rsSelect, stmtSelect, conn);
 		return resultCash;	
 	}
 	
 	public Boolean updateCash(Cash cash) throws Exception {
+		boolean result = false;
 		
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
@@ -156,18 +153,15 @@ public class CashDao {
 		int row = stmtUpdate.executeUpdate();
 		
 		if(row==1) {
-			stmtUpdate.close();
-			conn.close();
-			
-			return true;
+			result = true;
 		}	
-		stmtUpdate.close();
-		conn.close();
-		
-		return false;		
+
+		dbUtil.close(stmtUpdate, conn);
+		return result;		
 	}
 	
 	public Boolean deleteCash(Cash cash) throws Exception {
+		boolean result = false;
 		
 		// 1. DB 연결
 		DBUtil dbUtil = new DBUtil();
@@ -185,14 +179,10 @@ public class CashDao {
 		int row = stmtDelete.executeUpdate();
 		
 		if(row==1) {
-			stmtDelete.close();
-			conn.close();
-			
-			return true;
+			result = true;
 		}	
-		stmtDelete.close();
-		conn.close();
-		
-		return false;		
+
+		dbUtil.close(stmtDelete, conn);
+		return result;		
 	}
 }

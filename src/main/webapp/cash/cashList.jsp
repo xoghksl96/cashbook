@@ -131,6 +131,7 @@
 		<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
 		<a href="<%=request.getContextPath()%>/updateMemberForm.jsp">회원정보 수정</a>
 		<a href="<%=request.getContextPath()%>/updateMemberPwForm.jsp">비밀번호 수정</a>
+		<a href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원 탈퇴</a>
 	</div>
 	
 	<div>

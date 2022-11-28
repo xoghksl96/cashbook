@@ -28,12 +28,13 @@
 	MemberDao memberDao = new MemberDao();
 	
 	// 회원정보 수정 메서드 실행
-	Member loginMember = memberDao.updateMember(updateMember);
+	updateMember = memberDao.updateMember(updateMember);
 	
 	// 회원 가입 전 ID중복 확인
-	if(loginMember != null) { // 회원정보 수정에 성공 했을 시,
+	if(updateMember != null) { // 회원정보 수정에 성공 했을 시,
 		
-		// 수정된 loginMember를 새로 세션에 넣기
+		// 수정된 loginMember으로 다시 로그인하여 세션에 저장
+		Member loginMember = memberDao.login(updateMember);
 		session.setAttribute("loginMember", loginMember);
 		
 		String msg = URLEncoder.encode("회원정보 수정 성공", "utf-8");
@@ -41,7 +42,7 @@
 		response.sendRedirect(request.getContextPath()+targetUrl + "?msg="+msg);
 		return;
 		
-	} else { // 회원가입에 실패 했을 시,
+	} else { // 회원정보 수정에 실패 했을 시,
 		
 		String msg = URLEncoder.encode("올바른 비밀번호를 입력해주세요.", "utf-8");
 		String targetUrl = "/updateMemberForm.jsp";

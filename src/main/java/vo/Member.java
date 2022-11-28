@@ -1,10 +1,12 @@
 package vo;
 
 public class Member {
+	// 필드, 멤버변수, 객체변수, 속성
 	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberName;
+	private int memberLevel;
 	private String updatedate;
 	private String createdate;
 	
@@ -33,6 +35,12 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
+	public int getMemberLevel() {
+		return memberLevel;
+	}
+	public void setMemberLevel(int memberLevel) {
+		this.memberLevel = memberLevel;
+	}
 	public String getUpdatedate() {
 		return updatedate;
 	}
@@ -45,6 +53,4 @@ public class Member {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
-	
-	
 }

@@ -15,4 +15,15 @@ public class DBUtil {
 		
 		return returnConn;
 	}
+	
+	public void close(ResultSet rs, PreparedStatement stmt, Connection conn) throws Exception {
+		rs.close();
+		stmt.close();
+		conn.close();
+	}
+	
+	public void close(PreparedStatement stmt, Connection conn) throws Exception {
+		stmt.close();
+		conn.close();
+	}
 }
