@@ -3,7 +3,6 @@
 <%@ page import="java.net.*" %>
 <%@ page import="dao.*"%>
 <%@ page import="vo.*"%>
-
 <%
 	// 한글처리
 	request.setCharacterEncoding("utf-8");
@@ -196,6 +195,10 @@
 		%>
 			</tr>
 		</table>
+	</div>
+	
+	<div>
+		<jsp:include page="/inc/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

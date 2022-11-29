@@ -56,6 +56,7 @@
 			<td><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></td>
 			<td><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리 관리</a></td> <!-- 카테고리 페이징 X -->
 			<td><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></td>
+			<td><a href="<%=request.getContextPath()%>/admin/helpList.jsp">고객센터</a></td>
 		</tr>
 		
 		<tr>
@@ -101,5 +102,6 @@
 		</tr>
 		
 	</table>
+	
 </body>
 </html>
