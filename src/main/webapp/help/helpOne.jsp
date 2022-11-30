@@ -15,9 +15,9 @@
 	
 	String redirectUrl = null;
 	if(loginMember == null) {
-	redirectUrl = "/loginForm.jsp";
-	response.sendRedirect(request.getContextPath()+redirectUrl);
-	return;
+		redirectUrl = "/loginForm.jsp";
+		response.sendRedirect(request.getContextPath()+redirectUrl);
+		return;
 	}
 	
 	String loginMemberId = loginMember.getMemberId();
@@ -67,7 +67,7 @@
 				if(map.get("commentMemo") == null) {
 			%>
 					<td><a href="<%=request.getContextPath()%>/help/updateHelpForm.jsp">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/help/deleteHelp.jsp">삭제</a></td>
+					<td><a href="<%=request.getContextPath()%>/help/deleteHelp.jsp?helpNo=<%=map.get("helpNo")%>">삭제</a></td>
 			<%
 				} else {
 			%>

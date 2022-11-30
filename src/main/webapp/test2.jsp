@@ -9,15 +9,16 @@
 	// 1. Controller : session, request
 	
 	// 1-1 세션 확인 -> 로그인이 되어있지 않을때는 접근 불가
-	if(session.getAttribute("loginMember") == null) {
+	/* if(session.getAttribute("loginMember") == null) {
 		String msg = URLEncoder.encode("로그인이 필요한 서비스입니다.","utf-8");
 		
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg"+msg);
 		return;
-	}
+	} */
 	
-	Member loginMember = (Member)session.getAttribute("loginMember");
-	
+	//Member loginMember = (Member)session.getAttribute("loginMember");
+	Member loginMember = new Member();
+	loginMember.setMemberId("goodee");
 	// 1-2 년, 월  request 
 	int year = 0;
 	int month = 0;
@@ -87,26 +88,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <meta name="description" content=""/>
 <meta name="author" content=""/>
-<link href="../css/styles.css" rel="stylesheet"/>
-<link href="../css/calendarcss.css" rel="stylesheet"/>
-<link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="css/styles.css" rel="stylesheet"/>
+<link href="css/calendarcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-<title>가계부 페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
 	
 	 <div id="layoutSidenav_content">
-		<div class="container p-3">
-			<div class="calendar shadow bg-white p-4">
+		<div class="container">
+			<div class="calendar shadow bg-white p-5">
 				<div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
-					<h2 class="month font-weight-bold mb-0 text-uppercase">&nbsp; <%=title%></h2>
+					<h2 class="month font-weight-bold mb-0 text-uppercase"><%=title%></h2>
 				</div>
 
 				<br>
 		
-				<table class="tg">				
+				<table>		
+					<tr>
+						<th class = "align-items-left"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th class = "align-items-right"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a></th>
+					</tr>
+		
 					<tr class="day-names list-unstyled">
 						<th style="color : red">일</th>	
 						<th>월</th>
@@ -127,7 +137,7 @@
 								if(date > 0 && date <= lastDate) {
 						%>
 									<div>
-										<div class="pd-3">
+										<div>
 											<a href="<%=request.getContextPath()%>/cash/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>" type="button"><span><%=date%></span></a>
 										</div>
 						<%				
@@ -160,17 +170,13 @@
 					%>
 				</tr>
 			</table>
-			
-			
-			<div>
-				<div style="float :left ; width: 50% ; font-size : 15pt ;"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a></div>
-				<div style="float :left ; width: 50% ; font-size : 15pt ; text-align: right ;"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a></div>
-			</div>
 		</div>
 	</div>
 </div>
-
-<!-- main end -->	
-<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
+	<!-- main end -->
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="/js/scripts.js"></script>
 </body>
 </html>

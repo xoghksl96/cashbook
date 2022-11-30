@@ -47,61 +47,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/fontcss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<title>관리자 메인페이지</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></td>
-			<td><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리 관리</a></td> <!-- 카테고리 페이징 X -->
-			<td><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></td>
-			<td><a href="<%=request.getContextPath()%>/admin/helpList.jsp">고객센터</a></td>
-		</tr>
-		
-		<tr>
-			<th>공지 번호</th>
-			<th>공지 내용</th>
-			<th>공지 날짜</th>
-		</tr>
-		
-		<%
-			for(Notice n : noticeList) {
-		%>
-				<tr>
-					<td><%=n.getNoticeNo()%></td>
-					<td><%=n.getNoticeMemo()%></td>
-					<td><%=n.getNoticecreatedate()%></td>
-				</tr>			
-		<%
-			}
-		%>
-		
-		<tr><td> <td></tr>
-		<tr><td> <td></tr>
-		
-		<tr>
-			<th>멤버 번호</th>
-			<th>멤버 ID</th>
-			<th>가입 날짜</th>
-		</tr>
-		
-		<%
-			for(Member m : memberList) {
-		%>
-				<tr>
-					<td><%=m.getMemberNo()%></td>
-					<td><%=m.getMemberId()%></td>
-					<td><%=m.getCreatedate()%></td>
-				</tr>			
-		<%
-			}
-		%>
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></td>
-		</tr>
-		
-	</table>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+		<div id="layoutSidenav_content">
+			<div class="container p-5 ">
+				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+					<h2>최근공지</h2>
+					<table class="styled-table">
+						<thead>
+							<tr>
+								<th>공지 번호</th>
+								<th>공지 내용</th>
+								<th>공지 날짜</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						<%
+							for(Notice n : noticeList) {
+						%>
+								<tr>
+									<td><%=n.getNoticeNo()%></td>
+									<td><%=n.getNoticeMemo()%></td>
+									<td><%=n.getNoticecreatedate()%></td>
+								</tr>			
+						<%
+							}
+						%>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="shadow bg-white p-4">
+					<h2>최근 가입 멤버</h2>
+					<table class="styled-table">
+						<thead>
+							<tr>
+								<th>멤버 번호</th>
+								<th>멤버 ID</th>
+								<th>가입 날짜</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						<%
+							for(Member m : memberList) {
+						%>
+								<tr>
+									<td><%=m.getMemberNo()%></td>
+									<td><%=m.getMemberId()%></td>
+									<td><%=m.getCreatedate()%></td>
+								</tr>			
+						<%
+							}
+						%>
+						</tbody>			
+					</table>
+				</div>
+			</div>
+		</div>
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 	
 </body>
 </html>

@@ -15,26 +15,21 @@
 	// 공지 페이징
 	NoticeDao noticeDao = new NoticeDao();
 	
-	int currentPage = 1;
-	if(request.getParameter("currentPage") != null) {
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	}
-			
-	int rowPerPage = 5;	// 한 페이지에 출력할 공지사항 개수
-	int beginRow = (currentPage - 1) * rowPerPage; // 출력 시작점
-	int lastPage = noticeDao.selectNoticeCount() / rowPerPage;	// 마지막 페이지
-	if((noticeDao.selectNoticeCount() % rowPerPage) != 0){ // 나누어 떨어지지 않으면 +1
-		lastPage++;
-	}
-	
 	// 공시사항 데이터 가져와서 list에 담기
-	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage();
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link href="css/styles.css" rel="stylesheet"/>
+<link href="css/calendarcss.css" rel="stylesheet"/>
+<link href="css/fontcss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
 	if(request.getParameter("msg") != null)
@@ -50,109 +45,96 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
-<Style>
-	.titleText {
-		font-size : 30pt;
-		font-weight : bolder;
-	}
-	.text {
-		font-size : 15pt;
-		font-weight : bold;
-	}
-	.center {
-		text-align : center;
-	}
-	.buttonSize {
-		width : 200px;
-	}
-	.noticeTd {
-		width : 300px;
-	}
-</Style>
+<link rel="stylesheet" href="css/styles.css">
 <title>로그인 페이지</title>
 </head>
-<body>
-	<div class="container">		
-		<!-- 공지(5개)목록 페이징 -->
-		<div>
-			<div class="p-3 bg-primary text-white text-center rounded">
-				<h1 class="titleText center">공지사항</h1> 
+
+<body class="bg-dark">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                	<!-- 로그인 폼 -->
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
+									        <div class="form-floating mb-3">
+									            <input class="form-control" id="inputEmail" type="text" name="memberId"/>
+									            <label for="inputEmail">ID</label>
+									        </div>
+									        <div class="form-floating mb-3">
+									            <input class="form-control" id="inputPassword" type="password" name="memberPw"/>
+									            <label for="inputPassword">PW</label>
+									        </div>
+									        
+									        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+									            <button type="submit" class="btn btn-primary"><span class="text">Login</span></button>
+									        </div>
+									    </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a></div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </main>
+        
+			<div id="layoutSidenav_content">>
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-table me-1"></i>
+						공지사항
+					</div>
+					<div class="card-body">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th class="noticeTd">공지 번호</th>
+									<th class="noticeTd">공지 내용</th>
+									<th class="noticeTd">공지 날짜</th>
+								</tr>
+							</thead>
+
+							<tfoot>
+								<tr>
+									<th class="noticeTd">공지 번호</th>
+									<th class="noticeTd">공지 내용</th>
+									<th class="noticeTd">공지 날짜</th>
+								</tr>
+							</tfoot>
+
+							 <tbody>
+							<%
+								for(Notice n : list) {
+							%>
+									<tr>
+										<td class="noticeTd"><%=n.getNoticeNo()%></td>
+										<td class="noticeTd"><%=n.getNoticeMemo()%></td>
+										<td class="noticeTd"><%=n.getNoticecreatedate()%></td>
+									</tr>
+							<%
+								
+							}
+							%>
+							</tbody>
+						</table>
+			        </div>
+			    </div>
 			</div>
-			<table class="table">
-				<tr>
-					<th class="noticeTd">공지 번호</th>
-					<th class="noticeTd">공지 내용</th>
-					<th class="noticeTd">공지 날짜</th>
-				</tr>
-				
-				<%
-					for(Notice n : list) {
-				%>
-						<tr>
-							<td class="noticeTd"><%=n.getNoticeNo()%></td>
-							<td class="noticeTd"><%=n.getNoticeMemo()%></td>
-							<td class="noticeTd"><%=n.getNoticecreatedate()%></td>
-						</tr>
-				<%
-						
-					}
-				%>
-				
-				<tr>	
-				
-				<%
-					if(currentPage == 1) {	// 시작페이지
-				%>
-					<td class="noticeTd"></td>
-					<td class="noticeTd"><a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage+1%>">다음</a></td>
-				<%	
-					} else if(1 < currentPage && currentPage < lastPage) {
-				%>
-					<td class="noticeTd"><a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage-1%>">이전</a></td>
-					<td class="noticeTd"><a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage+1%>">다음</a></td>
-				<%		
-					} else if(currentPage == lastPage){ // 마지막 페이지
-				%>
-					<td class="noticeTd"><a href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage-1%>">이전</a></td>
-					<td class="noticeTd"></td>
-				<%		
-					}
-				%>
-				</tr>
-			</table>
 		</div>
-		
-		<div class="p-5 bg-dark text-white text-center rounded">
-		  	<h1 class="titleText center">Login</h1> 
-		</div>
-		
-		<br>
-		
-		<!-- 로그인 폼 -->
-		<form action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
-			<table class="table">
-				
-				<tr>
-					<th class="text center">ID</th>
-					<td class="text center"><input type="text" name="memberId"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">PW</th>
-					<td class="text center"><input type="password" name="memberPw"></td>
-				</tr>
-				
-				<tr>
-					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">로그인</span></button></th>
-				</tr>
-				
-			</table>
-			
-			<div>
-				<a type="button" href="<%=request.getContextPath()%>/insertMemberForm.jsp"><span class="text">회원가입</span></a>
-			</div>
-		</form>
-	</div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="js/datatables-simple-demo.js"></script>
 </body>
 </html>

@@ -53,6 +53,31 @@ public class NoticeDao {
 		return resultList;	
 	}
 	
+	
+	
+	public ArrayList<Notice> selectNoticeListByPage() throws Exception {
+		ArrayList<Notice> resultList = new ArrayList<Notice>();
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		String sqlSelect = "SELECT notice_no noticeNo, notice_memo noticeMemo, createdate "
+				+ "FROM notice "
+				+ "ORDER BY createdate DESC ";
+		
+		PreparedStatement stmtSelect = conn.prepareStatement(sqlSelect);
+		ResultSet rsSelect = stmtSelect.executeQuery();
+		
+		while(rsSelect.next()) {
+			Notice n = new Notice();
+			n.setNoticeNo(rsSelect.getInt("noticeNo"));
+			n.setNoticeMemo(rsSelect.getString("noticeMemo"));
+			n.setNoticecreatedate(rsSelect.getString("createdate"));
+			
+			resultList.add(n);
+		}
+		return resultList;	
+	}
+	
 	public boolean updateNotice(Notice notice) throws Exception {
 		boolean result = false ;
 		

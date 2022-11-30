@@ -215,6 +215,41 @@ public class MemberDao {
 		return list;		
 	}
 	
+	public ArrayList<Member> selectMemberListByPage() throws Exception {
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		// 1. DB 연결
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		// 2. sql 작성
+		String sqlSelect = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, updatedate, createdate "
+				+ "FROM member "
+				+ "ORDER BY createdate DESC, member_no DESC ";
+		
+		// 3. sql 세팅
+		PreparedStatement stmtSelect = conn.prepareStatement(sqlSelect);
+			
+		// 4. sql 실행
+		ResultSet rsSelect = stmtSelect.executeQuery();
+		
+		// 5. list에 값 저장
+		while(rsSelect.next()) {
+			Member returnMember = new Member();
+			returnMember.setMemberNo(rsSelect.getInt("memberNo"));
+			returnMember.setMemberId(rsSelect.getString("memberId"));
+			returnMember.setMemberLevel(rsSelect.getInt("memberLevel"));
+			returnMember.setMemberName(rsSelect.getString("memberName"));
+			returnMember.setUpdatedate(rsSelect.getString("updatedate"));
+			returnMember.setCreatedate(rsSelect.getString("createdate"));
+			
+			list.add(returnMember);
+		}
+		
+		dbUtil.close(rsSelect, stmtSelect, conn);
+		return list;		
+	}
+	
 	// 관리자 멤버 count
 	public int selectMemberCount() throws Exception {
 		int result = 0;

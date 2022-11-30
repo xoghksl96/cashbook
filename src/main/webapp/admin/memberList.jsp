@@ -40,13 +40,20 @@
 		lastPage++;
 	}
 	
-	ArrayList<Member> list = memberDao.selectMemberListByPage(beginRow, rowPerPage);
+	//ArrayList<Member> list = memberDao.selectMemberListByPage(beginRow, rowPerPage);
+	ArrayList<Member> list = memberDao.selectMemberListByPage();
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
 	if(request.getParameter("msg") != null)
@@ -57,48 +64,79 @@
 	}
 %>
 </script>
-
 <title>멤버관리 페이지(관리자 전용)</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></td>
-			<td><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리 관리</a></td>
-			<td><a href="<%=request.getContextPath()%>/admin/MemberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></td>
-		</tr>
-		
-		<tr>
-			<th>멤버 번호</th>
-			<th>멤버 ID</th>
-			<th>멤버 레벨</th>
-			<th>멤버 이름</th>
-			<th>마지막 수정일</th>
-			<th>생성 일자</th>
-			<th>레벨 수정</th>
-			<th>강제 퇴장</th>
-		</tr>
-		
-		<%
-			for(Member m : list) {
-		%>
-				<tr>
-					<td><%=m.getMemberNo()%></td>
-					<td><%=m.getMemberId()%></td>
-					<td><%=m.getMemberLevel()%></td>
-					<td><%=m.getMemberName()%></td>
-					<td><%=m.getUpdatedate()%></td>
-					<td><%=m.getCreatedate()%></td>
-					<td><a href="<%=request.getContextPath()%>/admin/updateMemberLevel.jsp?memberId=<%=m.getMemberId()%>&memberLevel=<%=m.getMemberLevel()%>">레벨 전환</a></td>
-					<td><a href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberId=<%=m.getMemberId()%>">회원 강퇴</a></td>
-				</tr>			
-		<%
-			}
-		%>
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></td>
-		</tr>
-		
-	</table>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	
+	<div id="layoutSidenav_content">
+		<div class="container p-5">
+			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+			<div class="card-header" style="margin-bottom : 20px;">
+				<h2><i class="fas fa-table me-1"></i>
+					멤버
+				</h2>
+			</div>
+				<table id="datatablesSimple">
+					<thead>
+						<tr>
+							<th>멤버 번호</th>
+							<th>멤버 ID</th>
+							<th>멤버 레벨</th>
+							<th>멤버 이름</th>
+							<th>마지막 수정일</th>
+							<th>생성 일자</th>
+							<th>레벨 수정</th>
+							<th>강제 퇴장</th>
+						</tr>
+					</thead>
+			
+					<tfoot>
+						<tr>
+							<th>멤버 번호</th>
+							<th>멤버 ID</th>
+							<th>멤버 레벨</th>
+							<th>멤버 이름</th>
+							<th>마지막 수정일</th>
+							<th>생성 일자</th>
+							<th>레벨 수정</th>
+							<th>강제 퇴장</th>
+						</tr>
+					</tfoot>
+			
+					 <tbody>
+					<%
+						for(Member m : list) {
+					%>
+							<tr>
+								<td><%=m.getMemberNo()%></td>
+								<td><%=m.getMemberId()%></td>
+								<td><%=m.getMemberLevel()%></td>
+								<td><%=m.getMemberName()%></td>
+								<td><%=m.getUpdatedate()%></td>
+								<td><%=m.getCreatedate()%></td>
+								<td><a href="<%=request.getContextPath()%>/admin/updateMemberLevel.jsp?memberId=<%=m.getMemberId()%>&memberLevel=<%=m.getMemberLevel()%>">레벨 전환</a></td>
+								<td><a href="<%=request.getContextPath()%>/admin/deleteMember.jsp?memberId=<%=m.getMemberId()%>">회원 강퇴</a></td>
+							</tr>			
+					<%
+						}
+					%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="../js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="../js/datatables-simple-demo.js"></script>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>

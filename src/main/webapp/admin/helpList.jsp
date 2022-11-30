@@ -36,49 +36,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+<%
+	if(request.getParameter("msg") != null)
+	{			
+%>	
+		alert("<%=request.getParameter("msg")%>");
+<%	
+	}
+%>
+</script>
+<title>고객센터 (관리자 전용)</title>
 </head>
 <body>
-	<table border="1">		
-		<tr>
-			<th>문의 번호</th>
-			<th>문의 내용</th>
-			<th>회원 ID</th>
-			<th>문의 날짜</th>
-			<th>답변 여부</th>
-		</tr>
-		
-		<%
-			for(HashMap<String, Object> m : list) {
-		%>
-				<tr>
-					<td><%=m.get("helpNo")%></td>
-					<td><a href="<%=request.getContextPath()%>/admin/helpOne.jsp?helpNo=<%=m.get("helpNo")%>"><%=m.get("helpMemo")%></a></td>
-					<td><%=m.get("helpMemberId")%></td>
-					<td><%=m.get("helpCreatedate")%></td>
-					<td>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	
+	<div id="layoutSidenav_content">
+		<div class="container p-5">
+			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+			<div class="card-header" style="margin-bottom : 20px;">
+				<h2><i class="fas fa-table me-1"></i>
+					멤버
+				</h2>
+			</div>
+				<table id="datatablesSimple">
+					<thead>
+						<tr>
+							<th>문의 번호</th>
+							<th>문의 내용</th>
+							<th>회원 ID</th>
+							<th>문의 날짜</th>
+							<th>답변 여부</th>
+						</tr>
+					</thead>
+			
+					<tfoot>
+						<tr>
+							<th>문의 번호</th>
+							<th>문의 내용</th>
+							<th>회원 ID</th>
+							<th>문의 날짜</th>
+							<th>답변 여부</th>
+						</tr>
+					</tfoot>
+			
+					 <tbody>
 					<%
-						if(m.get("commentMemo") == null) {
+						for(HashMap<String, Object> m : list) {
 					%>
-							&nbsp;&nbsp;
-					<%
-						} else {
-					%>
-							답변완료
+							<tr>
+								<td><%=m.get("helpNo")%></td>
+								<td><a href="<%=request.getContextPath()%>/admin/helpOne.jsp?helpNo=<%=m.get("helpNo")%>"><%=m.get("helpMemo")%></a></td>
+								<td><%=m.get("helpMemberId")%></td>
+								<td><%=m.get("helpCreatedate")%></td>
+								<td>
+								<%
+									if(m.get("commentMemo") == null) {
+								%>
+										&nbsp;&nbsp;
+								<%
+									} else {
+								%>
+										답변완료
+								<%
+									}
+								%>
+								</td>
+							</tr>			
 					<%
 						}
 					%>
-					</td>
-				</tr>			
-		<%
-			}
-		%>
-		
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></td>
-		</tr>
-		
-	</table>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="../js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="../js/datatables-simple-demo.js"></script>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>
