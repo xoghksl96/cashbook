@@ -1,4 +1,8 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="vo.*"%>
+<%
+	Member loginMember = (Member)session.getAttribute("loginMember");
+%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
    <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -45,8 +49,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">로그인 관리자 : </div>
-                       sadasd
+                        <div class="small">로그인 관리자 : <%=loginMember.getMemberId()%></div>
                     </div>
                 </nav>
             </div>

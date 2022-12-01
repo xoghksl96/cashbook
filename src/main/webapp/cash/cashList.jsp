@@ -82,23 +82,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
-<link href="../css/styles.css" rel="stylesheet"/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="../css/styles.css" rel="stylesheet" />
 <link href="../css/calendarcss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <title>가계부 페이지</title>
 </head>
-<body>
+<body class="sb-nav-fixed">
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
 	
 	 <div id="layoutSidenav_content">
-		<div class="container p-3">
+		<div class="ccontainer-fluid px-4">
 			<div class="calendar shadow bg-white p-4">
 				<div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
 					<h2 class="month font-weight-bold mb-0 text-uppercase">&nbsp; <%=title%></h2>
@@ -126,8 +127,8 @@
 								int date = i - beginBlank;
 								if(date > 0 && date <= lastDate) {
 						%>
-									<div>
-										<div class="pd-3">
+									<div style="width : 100% ; height : 100%">
+										<div style ="height: 20%;">
 											<a href="<%=request.getContextPath()%>/cash/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>" type="button"><span><%=date%></span></a>
 										</div>
 						<%				

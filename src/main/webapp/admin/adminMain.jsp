@@ -45,7 +45,7 @@
 	// View
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -56,6 +56,16 @@
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+<%
+	if(request.getParameter("msg") != null)
+	{			
+%>	
+		alert("<%=request.getParameter("msg")%>");
+<%	
+	}
+%>
+</script>
 <title>관리자 메인페이지</title>
 </head>
 <body>
@@ -64,6 +74,7 @@
 		<div id="layoutSidenav_content">
 			<div class="container p-5 ">
 				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+					<br>
 					<h2>최근공지</h2>
 					<table class="styled-table">
 						<thead>
@@ -91,6 +102,7 @@
 				</div>
 				
 				<div class="shadow bg-white p-4">
+					<br>
 					<h2>최근 가입 멤버</h2>
 					<table class="styled-table">
 						<thead>
@@ -119,7 +131,6 @@
 			</div>
 		</div>
 	<!-- main end -->	
-	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
-	
+	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>	
 </body>
 </html>

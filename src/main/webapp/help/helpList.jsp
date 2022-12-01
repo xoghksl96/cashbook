@@ -37,39 +37,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+<%
+	if(request.getParameter("msg") != null)
+	{			
+%>	
+		alert("<%=request.getParameter("msg")%>");
+<%	
+	}
+%>
+</script>
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1">		
-		<tr>
-			<th>QNA 번호</th>
-			<th>QNA 내용</th>
-			<th>마지막 수정일</th>
-			<th>생성 일자</th>
-		</tr>
-		
-		<%
-			for(Help h : list) {
-		%>
-				<tr>
-					<td><%=h.getHelpNo()%></td>
-					<td><a href="<%=request.getContextPath()%>/help/helpOne.jsp?helpNo=<%=h.getHelpNo()%>"><%=h.getHelpMemo()%></a></td>
-					<td><%=h.getUpdatedate()%></td>
-					<td><%=h.getCreatedate()%></td>
-				</tr>			
-		<%
-			}
-		%>
-		
-		<tr>
-			<td colspan="4"><a type="button" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp">문의 추가</a></td>
-		<tr>
-		
-		<tr>
-			<td><a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a></td>
-		</tr>
-		
-	</table>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+	
+	<div id="layoutSidenav_content">
+		<div class="container p-5">
+			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+			<div class="card-header" style="margin-bottom : 20px;">
+				<h2><i class="fas fa-table me-1"></i>
+					고객문의
+				</h2>
+			</div>
+				<table id="datatablesSimple">
+					<thead>
+						<tr>
+							<th>QNA 번호</th>
+							<th>QNA 내용</th>
+							<th>마지막 수정일</th>
+							<th>생성 일자</th>
+						</tr>
+					</thead>
+			
+					<tfoot>
+						<tr>
+							<th>QNA 번호</th>
+							<th>QNA 내용</th>
+							<th>마지막 수정일</th>
+							<th>생성 일자</th>
+						</tr>
+					</tfoot>
+			
+					 <tbody>
+					<%
+						for(Help h : list) {
+					%>
+							<tr>
+								<td><%=h.getHelpNo()%></td>
+								<td><a href="<%=request.getContextPath()%>/help/helpOne.jsp?helpNo=<%=h.getHelpNo()%>"><%=h.getHelpMemo()%></a></td>
+								<td><%=h.getUpdatedate()%></td>
+								<td><%=h.getCreatedate()%></td>
+							</tr>			
+					<%
+						}
+					%>
+					</tbody>
+				</table>
+				
+				<div style="text-align : center">
+					<a type="button" class="w-btn-outline w-btn-blue-outline" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp">문의 하기</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>
