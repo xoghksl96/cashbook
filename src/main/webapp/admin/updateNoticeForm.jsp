@@ -38,8 +38,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+<meta charset="utf-8"/>	
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
 	if(request.getParameter("msg") != null)
@@ -49,60 +57,45 @@
 <%	
 	}
 %>
-</script>	
-
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
-<Style>
-	.titleText {
-		font-size : 30pt;
-		font-weight : bolder;
-	}
-	.text {
-		font-size : 15pt;
-		font-weight : bold;
-	}
-	.center {
-		text-align : center;
-	}
-	.buttonSize {
-		width : 200px;
-	}
-	.noticeTd {
-		width : 300px;
-	}
-</Style>
+</script>
 <title>공지수정 (관리자)</title>
 </head>
 <body>
-	<div class="container">		
-		<!-- 로그인 폼 -->
-		<form action="<%=request.getContextPath()%>/admin/updateNoticeAction.jsp" method="post">
-			<table class="table">
-				
-				<tr>
-					<th class="text center">공지 번호</th>
-					<td class="text center"><input type="number" style="background-color : pink" name="noticeNo" value="<%=noticeNo%>" readonly="readonly"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">공지 내용</th>
-					<td class="text center"><textarea name="noticeMemo"><%=noticeMemo%></textarea></td>
-				</tr>
-				
-				<tr>
-					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">공지 수정</span></button></th>
-				</tr>
-				
-			</table>
-			
-			<div>
-				<a type="button" href="<%=request.getContextPath()%>/logout.jsp"><span class="text">로그아웃</span></a>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	
+	<div id="layoutSidenav_content">
+		<div class="container p-5 ">
+			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+			<div class="card-header" style="margin-bottom : 20px;">
+				<h2><i class="fas fa-table me-1"></i>
+					공지사항
+				</h2>
 			</div>
-		</form>
+				<form action="<%=request.getContextPath()%>/admin/updateNoticeAction.jsp" method="post">
+					<table class="table">	
+									
+						<tr>
+							<th class="text center">공지 번호</th>
+							<td class="text center"><input type="number" style="background-color : pink" name="noticeNo" value="<%=noticeNo%>" readonly="readonly"></td>
+						</tr>
+						
+						<tr>
+							<th class="text center">공지 내용</th>
+							<td class="text center"><textarea  style="width : 100%" name="noticeMemo"><%=noticeMemo%></textarea></td>
+						</tr>
+						
+					</table>
+			
+					<div style="text-align : center">
+						<Button type="submit" class="w-btn-outline w-btn-blue-outline">공지 수정</Button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
 </html>

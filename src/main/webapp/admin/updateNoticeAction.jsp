@@ -10,7 +10,7 @@
 	
 	// 1. Controller
 	if(request.getParameter("noticeNo") == null || request.getParameter("noticeMemo") == null ||
-		request.getParameter("noticeNo").equals("") || request.getParameter("noticeMemo").equals("")) {
+			request.getParameter("noticeNo").equals("") || request.getParameter("noticeMemo").equals("")) {
 		
 		String targetUrl = "/admin/updateNoticeForm.jsp";
 		response.sendRedirect(request.getContextPath()+targetUrl);

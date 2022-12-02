@@ -140,15 +140,20 @@ public class CashDao {
 		PreparedStatement stmtInsert = null;
 		
 		try {
-			// 1. DB 연결
-			conn = dbUtil.getConnection();
 			
 			// 2. sql 작성
 			String sqlInsert = "INSERT INTO cash (category_no, member_id, cash_date, cash_price, cash_memo, updatedate, createdate) "
 					+ "VALUES (?, ?, ?, ?, ?, CURDATE(), CURDATE())";
 			
 			// 3. sql 세팅
+			conn = dbUtil.getConnection();
 			stmtInsert = conn.prepareStatement(sqlInsert);
+			
+			stmtInsert.setInt(1, cash.getCategoryNo());
+			stmtInsert.setString(2, cash.getMemberId());
+			stmtInsert.setString(3, cash.getCashDate());
+			stmtInsert.setLong(4, cash.getCashPrice());
+			stmtInsert.setString(5, cash.getCashMemo());
 			
 			// 4. sql 실행, 결과에 따라 True false 반환
 			int row = stmtInsert.executeUpdate();
