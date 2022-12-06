@@ -92,6 +92,16 @@
 <link href="../css/calendarcss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+<%
+	if(request.getParameter("msg") != null)
+	{			
+%>	
+		alert("<%=request.getParameter("msg")%>");
+<%	
+	}
+%>
+</script>
 <title>가계부 페이지</title>
 </head>
 <body class="sb-nav-fixed">
@@ -128,7 +138,7 @@
 								if(date > 0 && date <= lastDate) {
 						%>
 									<div style="width : 100% ; height : 100%">
-										<div style ="height: 20%;">
+										<div style ="height: 20%; margin-left : 5%">
 											<a href="<%=request.getContextPath()%>/cash/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>" type="button"><span><%=date%></span></a>
 										</div>
 						<%				
@@ -136,7 +146,7 @@
 										String cashDate = (String)(m.get("cashDate"));
 											if(Integer.parseInt(cashDate.substring(8)) == date) {
 						%>						
-										<div>
+										<div style="margin-left : 5%">
 											[<%=(String)m.get("categoryKind")%>]
 											<%=(String)m.get("categoryName")%>
 											<%=(Long)m.get("cashPrice")%>원
@@ -162,11 +172,15 @@
 				</tr>
 			</table>
 			
+			<br>
 			
 			<div>
 				<div style="float :left ; width: 50% ; font-size : 15pt ;"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">&#8701;이전달</a></div>
 				<div style="float :left ; width: 50% ; font-size : 15pt ; text-align: right ;"><a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">다음달&#8702;</a></div>
 			</div>
+			
+			<br>
+			
 		</div>
 	</div>
 </div>

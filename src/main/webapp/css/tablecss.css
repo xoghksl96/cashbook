@@ -20,7 +20,7 @@
 }
 
 .styled-table thead tr {
-	
+	font-family: 'GangwonEduPowerExtraBoldA';
     background-color: #009879;
     color: #ffffff;
     text-align: left;
@@ -28,6 +28,7 @@
 
 .styled-table th,
 .styled-table td {
+	font-family: 'GangwonEduPowerExtraBoldA';
     padding: 12px 15px;
 }
 

@@ -71,6 +71,7 @@
 <body>
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	
 		<div id="layoutSidenav_content">
 			<div class="container p-5 ">
 				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
@@ -125,7 +126,7 @@
 						<%
 							}
 						%>
-						</tbody>			
+						</tbody>				
 					</table>
 				</div>
 			</div>

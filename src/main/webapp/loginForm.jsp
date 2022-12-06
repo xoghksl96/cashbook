@@ -40,13 +40,7 @@
 <%	
 	}
 %>
-</script>	
-
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="css/styles.css">
+</script>
 <title>로그인 페이지</title>
 </head>
 
@@ -72,7 +66,9 @@
 									        </div>
 									        
 									        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-									            <button type="submit" class="btn btn-primary"><span class="text">Login</span></button>
+									        	<div style="text-align : right">
+									        		 <button type="submit" class="btn btn-primary"><span class="text">Login</span></button>
+									        	</div>
 									        </div>
 									    </form>
                                     </div>

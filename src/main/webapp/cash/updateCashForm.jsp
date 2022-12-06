@@ -62,8 +62,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="../css/styles.css" rel="stylesheet" />
+<link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<style>
+	input {
+		width : 80%;
+		height : 100%;
+		text-align : center;
+	}
+	textarea {
+		width : 100%;
+	}
+	th,td {
+		text-align : center;
+	}
+</style>
 <script type="text/javascript">
 <%
 	if(request.getParameter("msg") != null)
@@ -74,69 +96,71 @@
 	}
 %>
 </script>
-
-<style>
-	td {
-		width : 200px;
-		height : 80px;
-		font-size : 20pt;
-		text-align : center;
-	}
-	.cashMemo {
-		width : 500px;
-	}
-</style>
 <title><%=title%> 가계부 수정</title>
 </head>
 <body>
-	<!-- cash 입력 -->
-	<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post">
-		<input type="hidden" name="cashNo" value="<%=cashNo%>"> 
-		<input type="hidden" name="year" value="<%=year%>"> 
-		<input type="hidden" name="month" value="<%=month%>"> 
-		<input type="hidden" name="date" value="<%=date%>"> 
-		<table border="1">
-			<tr>
-				<td>categoryNo</td>
-				<td>cashDate</td>
-				<td>cashPrice</td>
-				<td>cashMemo</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<select name="categoryNo">
-					<%
-						for(Category c : categoryList) {
-							if(c.getCategoryNo() == cashOne.getCategoryNo()) {
-					%>
-								<option value="<%=c.getCategoryNo()%>" selected>
-									[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
-								</option>
-					<%
-							} else {
-					%>
-								<option value="<%=c.getCategoryNo()%>">
-									[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
-								</option>
-					<%
-							}
-						}
-					%>
-					</select>
-				</td>
-				<td><input type="text" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
-				<td><input type="number" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
-				<td><textarea rows="3" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
-			</tr>
-			
-			<tr>
-				<td colspan="4">
-					<Button type="submit">가계부 수정</Button>
-				</td>
-			</tr>
-			
-		</table>
-	</form>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+	
+	<div id="layoutSidenav_content">
+			<div class="container p-5 ">
+				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+					<br>
+					<h2 style="margin-left : 2% ; margin-top : 2%"><%=title%></h2>
+					<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post">
+						<input type="hidden" name="cashNo" value="<%=cashNo%>"> 
+						<input type="hidden" name="year" value="<%=year%>"> 
+						<input type="hidden" name="month" value="<%=month%>"> 
+						<input type="hidden" name="date" value="<%=date%>"> 
+						<table class="styled-table">
+							<thead>
+								<tr>
+									<td>categoryNo</td>
+									<td>cashDate</td>
+									<td>cashPrice</td>
+									<td>cashMemo</td>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr>
+									<td>
+										<select name="categoryNo">
+										<%
+											for(Category c : categoryList) {
+												if(c.getCategoryNo() == cashOne.getCategoryNo()) {
+										%>
+													<option value="<%=c.getCategoryNo()%>" selected>
+														[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
+													</option>
+										<%
+												} else {
+										%>
+													<option value="<%=c.getCategoryNo()%>">
+														[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
+													</option>
+										<%
+												}
+											}
+										%>
+										</select>
+									</td>
+									<td><input type="text" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
+									<td><input type="number" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
+									<td><textarea rows="3" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
+								</tr>
+							</tbody>
+							
+						</table>
+						
+						<div style="text-align : center">
+							<Button type="submit" class="w-btn-outline w-btn-blue-outline">수정</Button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>
