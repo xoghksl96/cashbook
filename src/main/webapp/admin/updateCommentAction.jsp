@@ -5,6 +5,9 @@
 <%@ page import="dao.*"%>
 <%@ page import="vo.*"%>
 <%
+	//한글 처리
+	request.setCharacterEncoding("utf-8");
+
 	// 1. Controller
 	
 	// 1-1 세션확인

@@ -47,6 +47,7 @@
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -64,38 +65,36 @@
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
 	
-	<div>
-		<h1>답변수정 페이지(관리자 전용)</h1>
-	</div>
-	
-	<div>
-		<form action="<%=request.getContextPath()%>/admin/updateCommentAction.jsp" method="post">
-			<table>
-				<tr>
-					<td>문의번호</td>
-					<td><input type="number" style="background-color : pink" name="helpNo" value="<%=helpNo%>" readonly="readonly"></td>
-				<tr>
-				
-				<tr>
-					<td>문의내용</td>
-					<td><textarea cols="30" rows="5" name="helpMemo"><%=helpMemo%></textarea></td>
-				<tr>
-				
-				<tr>
-					<td>답변번호</td>
-					<td><input type="number" style="background-color : pink" name="commentNo" value="<%=commentNo%>" readonly="readonly"></td>
-				<tr>
-				
-				<tr>
-					<td>답변번호</td>
-					<td><textarea cols="30" rows="5" name="commentMemo"><%=commentMemo%></textarea></td>
-				<tr>
-				
-				<tr>
-					<td colspan="2"><Button type="submit">답변수정</Button>
-				</tr>							
-			</table>
-		</form>
+	<div id="layoutSidenav_content">
+			<div class="container p-5 ">
+				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+				<br>
+				<h2>답변수정 페이지(관리자 전용)</h2>
+				<form action="<%=request.getContextPath()%>/admin/updateCommentAction.jsp" method="post">
+					<input type="number" style="background-color : pink" name="helpNo" value="<%=helpNo%>" readonly="readonly" hidden="hidden">
+					<input type="number" style="background-color : pink" name="commentNo" value="<%=commentNo%>" readonly="readonly" hidden="hidden">
+					<table class="styled-table">
+						<thead>
+							<tr>
+								<td style="text-align : center; font-size : 15pt">문의내용</td>
+								<td><textarea rows="5" style="width : 100%" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td style="text-align : center; font-size : 15pt">답변내용</td>
+								<td><textarea  rows="5" style="width : 100%"name="commentMemo"><%=commentMemo%></textarea></td>
+							</tr>
+						</tbody>						
+					</table>
+					
+					<div style="text-align : center">
+						<button type="submit" class="w-btn-outline w-btn-blue-outline">답변 수정</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 	
 	<!-- main end -->	

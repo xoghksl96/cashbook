@@ -57,8 +57,19 @@
 <title>회원정보 수정 페이지</title>
 </head>
 <body>
-	<!-- main start -->	
-	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+<%
+	if(loginMember.getMemberLevel() == 1) {
+%>
+		<!-- main start -->	
+		<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+<%
+	} else {
+%>
+		<!-- main start -->	
+		<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+<%
+	}
+%>
 	
 	<div id="layoutSidenav_content">
 		<div class="container p-5 ">

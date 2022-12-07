@@ -29,6 +29,10 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/cash/cashList.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                가계부
+                            </a>
 							<a class="nav-link" href="<%=request.getContextPath()%>/admin/noticeList.jsp">
                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                공지 관리

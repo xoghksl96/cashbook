@@ -102,12 +102,28 @@
 	}
 %>
 </script>
+
+<style>
+	td,th {
+		width : 14.25%
+	}
+</style>
 <title>가계부 페이지</title>
 </head>
 <body class="sb-nav-fixed">
-	<!-- main start -->	
-	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
-	
+<%
+	if(loginMember.getMemberLevel() == 1) {
+%>
+		<!-- main start -->	
+		<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+<%
+	} else {
+%>
+		<!-- main start -->	
+		<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+<%
+	}
+%>
 	 <div id="layoutSidenav_content">
 		<div class="ccontainer-fluid px-4">
 			<div class="calendar shadow bg-white p-4">

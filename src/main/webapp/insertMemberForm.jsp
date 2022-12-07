@@ -10,8 +10,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="css/styles.css" rel="stylesheet"/>
+<link href="css/calendarcss.css" rel="stylesheet"/>
+<link href="css/fontcss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
 	if(request.getParameter("msg") != null)
@@ -21,69 +29,67 @@
 <%	
 	}
 %>
-</script>	
-
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
-<Style>
-	.titleText {
-		font-size : 30pt;
-		font-weight : bolder;
-	}
-	.text {
-		font-size : 15pt;
-		font-weight : bold;
-	}
-	.center {
-		text-align : center;
-	}
-	.buttonSize {
-		width : 200px;
-	}
-</Style>
-<title>회원가입 페이지</title>
+</script>
 </head>
-<body>
-	<div class="container">
-	
-		<div class="p-5 bg-dark text-white text-center rounded">
-		  	<h1 class="titleText center">회원가입</h1> 
+<body class="bg-dark">
+	<div id="layoutAuthentication">
+		<div id="layoutAuthentication_content">
+			<main>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-7">
+							<div class="card shadow-lg border-0 rounded-lg mt-5">
+								<div class="card-header"><h3 class="text-center font-weight-light my-4">회원가입</h3></div>
+								<div class="card-body">
+									<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">  
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputId" name="memberId" type="text" placeholder="Id" />
+											<label for="inputId">ID</label>
+										</div>
+										                            		    
+										<br>
+											
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputPassword" name="memberPw" type="password" placeholder="Password" />
+											<label for="inputPasswordConfirm">Password</label>
+										</div>
+										                                        
+										<br>
+											
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputPasswordCheck" name="memberPwCheck" type="password" placeholder="Password Check" />
+											<label for="inputPasswordConfirm">Password Check</label>
+										</div>
+										                                        
+										<br>
+											
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputName" name="memberName" type="text" placeholder="Enter your name" />
+											<label for="inputName">NAME</label>
+										</div>
+						
+										<br>
+										<div class="mt-4 mb-0">
+											<div class="d-grid"><button type="submit" class="btn btn-primary btn-block">회원가입</button></div>
+										</div>
+	                                      </form>
+	                                  </div>
+								<div class="card-footer text-center py-3">
+									<div class="small"><a href="<%=request.getContextPath()%>/loginForm.jsp">로그인</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
 		</div>
-		
-		<br>
-		
-		<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">
-			<table class="table">
-				
-				<tr>
-					<th class="text center">ID</th>
-					<td class="text center"><input type="text" name="memberId"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">PW</th>
-					<td class="text center"><input type="password" name="memberPw"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">PW CHECK</th>
-					<td class="text center"><input type="password" name="memberPwCheck"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">NAME</th>
-					<td class="text center"><input type="text" name="memberName"></td>
-				</tr>
-				
-				<tr>
-					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">회원가입</span></button></th>
-				</tr>
-				
-			</table>
-		</form>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="js/datatables-simple-demo.js"></script>	
 </body>
 </html>

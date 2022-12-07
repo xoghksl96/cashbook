@@ -68,8 +68,7 @@
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <style>
 	input {
-		width : 80%;
-		height : 100%;
+		width : auto;
 		text-align : center;
 	}
 	textarea {
@@ -92,8 +91,19 @@
 <title><%=title%> 가계부</title>
 </head>
 <body>
+<%
+	if(loginMember.getMemberLevel() == 1) {
+%>
 	<!-- main start -->	
-	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+<%
+	} else {
+%>
+		<!-- main start -->	
+		<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+<%
+	}
+%>
 	
 	<div id="layoutSidenav_content">
 			<div class="container p-5 ">
