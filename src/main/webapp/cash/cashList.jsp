@@ -123,12 +123,12 @@
 		<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
 <%
 	}
-%>
-	 <div id="layoutSidenav_content">
-		<div class="ccontainer-fluid px-4">
-			<div class="calendar shadow bg-white p-4">
-				<div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
-					<h2 class="month font-weight-bold mb-0 text-uppercase">&nbsp; <%=title%></h2>
+%>		<br>
+		<div class="container px-4">
+			<br>
+			<div class="calendar-fluid shadow bg-white p-4">
+				<div class="d-flex align-items-center" style="margin-top : 5px"><i class="fa fa-calendar fa-3x mr-3"></i>
+					<h2 class="month font-weight-bold mb-0 text-uppercase" style="margin-top :10pt">&nbsp; <%=title%></h2>
 				</div>
 
 				<br>

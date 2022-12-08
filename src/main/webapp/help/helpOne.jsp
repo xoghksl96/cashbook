@@ -42,10 +42,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/fontcss.css" rel="stylesheet"/>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+<%
+	if(request.getParameter("msg") != null)
+	{			
+%>	
+		alert("<%=request.getParameter("msg")%>");
+<%	
+	}
+%>
+</script>
 <title>Insert title here</title>
 </head>
-<body>
+<body class="sb-nav-fixed">
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
 	<table border="1">		
 		<tr>
 			<th>문의 번호</th>
@@ -113,5 +133,8 @@
 	
 	
 	<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>

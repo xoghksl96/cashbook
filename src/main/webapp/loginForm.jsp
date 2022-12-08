@@ -15,7 +15,7 @@
 	// 공지 페이징
 	NoticeDao noticeDao = new NoticeDao();
 	
-	// 공시사항 데이터 가져와서 list에 담기
+	// 공시사항 데이터 가져와서 list에 담기.
 	ArrayList<Notice> list = noticeDao.selectNoticeListByPage();
 %>
 <!DOCTYPE html>

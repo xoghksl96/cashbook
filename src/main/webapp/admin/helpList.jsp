@@ -62,10 +62,10 @@
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
 	
-	<div id="layoutSidenav_content">
-		<div class="container p-5">
-			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
 			<div class="card-header" style="margin-bottom : 20px;">
+				<br>
 				<h2><i class="fas fa-table me-1"></i>
 					고객문의
 				</h2>
@@ -121,8 +121,7 @@
 				</table>
 			</div>
 		</div>
-	</div>
-	
+
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>

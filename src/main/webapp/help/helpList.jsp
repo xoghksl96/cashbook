@@ -46,6 +46,7 @@
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/buttoncss.css" rel="stylesheet"/>
+<link href="../css/fontcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -59,58 +60,57 @@
 </script>
 <title>Insert title here</title>
 </head>
-<body>
+<body class="sb-nav-fixed">
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
 	
-	<div id="layoutSidenav_content">
-		<div class="container p-5">
-			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
 			<div class="card-header" style="margin-bottom : 20px;">
-				<h2><i class="fas fa-table me-1"></i>
-					고객문의
-				</h2>
-			</div>
-				<table id="datatablesSimple">
-					<thead>
+			<br>
+			<h2><i class="fas fa-table me-1"></i>
+				고객문의
+			</h2>
+		</div>
+			<table id="datatablesSimple">
+				<thead>
+					<tr>
+						<th>QNA 번호</th>
+						<th>QNA 내용</th>
+						<th>마지막 수정일</th>
+						<th>생성 일자</th>
+					</tr>
+				</thead>
+		
+				<tfoot>
+					<tr>
+						<th>QNA 번호</th>
+						<th>QNA 내용</th>
+						<th>마지막 수정일</th>
+						<th>생성 일자</th>
+					</tr>
+				</tfoot>
+		
+				 <tbody>
+				<%
+					for(Help h : list) {
+				%>
 						<tr>
-							<th>QNA 번호</th>
-							<th>QNA 내용</th>
-							<th>마지막 수정일</th>
-							<th>생성 일자</th>
-						</tr>
-					</thead>
+							<td><%=h.getHelpNo()%></td>
+							<td><a href="<%=request.getContextPath()%>/help/helpOne.jsp?helpNo=<%=h.getHelpNo()%>"><%=h.getHelpMemo()%></a></td>
+							<td><%=h.getUpdatedate()%></td>
+							<td><%=h.getCreatedate()%></td>
+						</tr>			
+				<%
+					}
+				%>
+				</tbody>
+			</table>
 			
-					<tfoot>
-						<tr>
-							<th>QNA 번호</th>
-							<th>QNA 내용</th>
-							<th>마지막 수정일</th>
-							<th>생성 일자</th>
-						</tr>
-					</tfoot>
-			
-					 <tbody>
-					<%
-						for(Help h : list) {
-					%>
-							<tr>
-								<td><%=h.getHelpNo()%></td>
-								<td><a href="<%=request.getContextPath()%>/help/helpOne.jsp?helpNo=<%=h.getHelpNo()%>"><%=h.getHelpMemo()%></a></td>
-								<td><%=h.getUpdatedate()%></td>
-								<td><%=h.getCreatedate()%></td>
-							</tr>			
-					<%
-						}
-					%>
-					</tbody>
-				</table>
-				
-				<div style="text-align : center">
-					<a type="button" class="w-btn-outline w-btn-blue-outline" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp">문의 하기</a>
-				</div>
-				
+			<div style="text-align : center">
+				<a type="button" class="w-btn-outline w-btn-blue-outline" href="<%=request.getContextPath()%>/help/insertHelpForm.jsp">문의 하기</a>
 			</div>
+			
 		</div>
 	</div>
 	

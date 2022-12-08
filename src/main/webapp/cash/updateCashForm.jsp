@@ -112,64 +112,62 @@
 	}
 %>
 	
-	<div id="layoutSidenav_content">
-			<div class="container p-5 ">
-				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
-					<br>
-					<h2 style="margin-left : 2% ; margin-top : 2%"><%=title%></h2>
-					<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post">
-						<input type="hidden" name="cashNo" value="<%=cashNo%>"> 
-						<input type="hidden" name="year" value="<%=year%>"> 
-						<input type="hidden" name="month" value="<%=month%>"> 
-						<input type="hidden" name="date" value="<%=date%>"> 
-						<table class="styled-table">
-							<thead>
-								<tr>
-									<td>categoryNo</td>
-									<td>cashDate</td>
-									<td>cashPrice</td>
-									<td>cashMemo</td>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr>
-									<td>
-										<select name="categoryNo" style="height:50px;">
-										<%
-											for(Category c : categoryList) {
-												if(c.getCategoryNo() == cashOne.getCategoryNo()) {
-										%>
-													<option value="<%=c.getCategoryNo()%>" selected>
-														[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
-													</option>
-										<%
-												} else {
-										%>
-													<option value="<%=c.getCategoryNo()%>">
-														[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
-													</option>
-										<%
-												}
-											}
-										%>
-										</select>
-									</td>
-									<td><input type="text" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
-									<td><input type="number" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
-									<td><textarea rows="3" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
-								</tr>
-							</tbody>
-							
-						</table>
-						
-						<div style="text-align : center">
-							<Button type="submit" class="w-btn-outline w-btn-blue-outline">수정</Button>
-						</div>
-					</form>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2 style="margin-left : 2% ; margin-top : 2%"><%=title%></h2>
+			<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post">
+				<input type="hidden" name="cashNo" value="<%=cashNo%>"> 
+				<input type="hidden" name="year" value="<%=year%>"> 
+				<input type="hidden" name="month" value="<%=month%>"> 
+				<input type="hidden" name="date" value="<%=date%>"> 
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td>categoryNo</td>
+							<td>cashDate</td>
+							<td>cashPrice</td>
+							<td>cashMemo</td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td>
+								<select name="categoryNo" style="height:50px;">
+								<%
+									for(Category c : categoryList) {
+										if(c.getCategoryNo() == cashOne.getCategoryNo()) {
+								%>
+											<option value="<%=c.getCategoryNo()%>" selected>
+												[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
+											</option>
+								<%
+										} else {
+								%>
+											<option value="<%=c.getCategoryNo()%>">
+												[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
+											</option>
+								<%
+										}
+									}
+								%>
+								</select>
+							</td>
+							<td><input type="text" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
+							<td><input type="number" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
+							<td><textarea rows="3" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
+						</tr>
+					</tbody>
+					
+				</table>
+				
+				<div style="text-align : center">
+					<Button type="submit" class="w-btn-outline w-btn-blue-outline">수정</Button>
 				</div>
-			</div>
+			</form>
 		</div>
+	</div>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>

@@ -105,101 +105,99 @@
 	}
 %>
 	
-	<div id="layoutSidenav_content">
-			<div class="container p-5 ">
-				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
-					<br>
-					<h2><%=title%></h2>
-					<!-- cash 출력 -->
-					<table class="styled-table">
-						<thead>
-							<tr>
-								<th>수입/지출</th>
-								<th>항목</th>
-								<th>금액</th>
-								<th>상세정보</th>
-								<th></th>
-								<th></th>
-							<tr>
-						</thead>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2><%=title%></h2>
+			<!-- cash 출력 -->
+			<table class="styled-table">
+				<thead>
+					<tr>
+						<th>수입/지출</th>
+						<th>항목</th>
+						<th>금액</th>
+						<th>상세정보</th>
+						<th></th>
+						<th></th>
+					<tr>
+				</thead>
+				
+				<tbody>
+				<%
+					for(HashMap<String, Object> m : cashList) {		
+				%>
+						<tr>
+							<%
+								if(m.get("categoryKind").equals("지출"))
+								{
+							%>
+									<td style="color : blue"><%=m.get("categoryKind")%></td>
+							<%
+								} else {
+							%>
+									<td style="color : red"><%=m.get("categoryKind")%></td>
+							<%
+								}
+							%>
+							<td>[<%=m.get("categoryName")%>]</td>
+							<td><%=m.get("cashPrice")%>원</td>
+							<td class="cashMemo"><%=m.get("cashMemo")%></td>
+							<td><a href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
+							<td><a href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">삭제</a></td>
+						</tr>
+				<%
+					}
+				%>
+				</tbody>
+			</table>
+
+			<br>
+			<h2>가계부 작성</h2>
+			<!-- cash 입력 -->
+			<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post">
+				<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
+				<input type="hidden" name="year" value="<%=year%>"> 
+				<input type="hidden" name="month" value="<%=month%>"> 
+				<input type="hidden" name="date" value="<%=date%>"> 
+				<table class="styled-table">
 						
-						<tbody>
-						<%
-							for(HashMap<String, Object> m : cashList) {		
-						%>
-								<tr>
-									<%
-										if(m.get("categoryKind").equals("지출"))
-										{
-									%>
-											<td style="color : blue"><%=m.get("categoryKind")%></td>
-									<%
-										} else {
-									%>
-											<td style="color : red"><%=m.get("categoryKind")%></td>
-									<%
-										}
-									%>
-									<td>[<%=m.get("categoryName")%>]</td>
-									<td><%=m.get("cashPrice")%>원</td>
-									<td class="cashMemo"><%=m.get("cashMemo")%></td>
-									<td><a href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">수정</a></td>
-									<td><a href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp?year=<%=year%>&month=<%=month%>&date=<%=date%>&cashNo=<%=m.get("cashNo")%>">삭제</a></td>
-								</tr>
-						<%
-							}
-						%>
-						</tbody>
-					</table>
-	
-					<br>
-					<h2>가계부 작성</h2>
-					<!-- cash 입력 -->
-					<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post">
-						<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
-						<input type="hidden" name="year" value="<%=year%>"> 
-						<input type="hidden" name="month" value="<%=month%>"> 
-						<input type="hidden" name="date" value="<%=date%>"> 
-						<table class="styled-table">
-							
-							<thead>
-								<tr>
-									<th>categoryNo</th>
-									<th>cashDate</th>
-									<th>cashPrice</th>
-									<th>cashMemo</th>
-								<tr>
-							</thead>
-							
-							<tbody>
-								<tr>
-									<td>
-										<select name="categoryNo">
-										<%
-											for(Category c : categoryList) {
-										%>
-												<option value="<%=c.getCategoryNo()%>">
-													[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
-												</option>
-										<%
-											}
-										%>
-										</select>
-									</td>
-									<td><input type="text" name="cashDate" value="<%=year%>-<%=month%>-<%=date%>" readonly="readonly"></td>
-									<td><input type="number" name="cashPrice" value=""></td>
-									<td><textarea rows="3" cols="50" name="cashMemo"></textarea></td>
-								</tr>
-							</tbody>				
-						</table>
-						
-						<div style="text-align : center">
-							<Button type="submit" class="w-btn-outline w-btn-blue-outline">작성</Button>
-						</div>
-					</form>
+					<thead>
+						<tr>
+							<th>categoryNo</th>
+							<th>cashDate</th>
+							<th>cashPrice</th>
+							<th>cashMemo</th>
+						<tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td>
+								<select name="categoryNo" style="height : 50px ; font-size : 10pt">
+								<%
+									for(Category c : categoryList) {
+								%>
+										<option value="<%=c.getCategoryNo()%>">
+											[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
+										</option>
+								<%
+									}
+								%>
+								</select>
+							</td>
+							<td><input type="text" name="cashDate" value="<%=year%>-<%=month%>-<%=date%>" readonly="readonly"></td>
+							<td><input type="number" name="cashPrice" value=""></td>
+							<td><textarea rows="3" cols="50" name="cashMemo"></textarea></td>
+						</tr>
+					</tbody>				
+				</table>
+					
+				<div style="text-align : center">
+					<Button type="submit" class="w-btn-outline w-btn-blue-outline">작성</Button>
 				</div>
-			</div>
+			</form>
 		</div>
+	</div>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>

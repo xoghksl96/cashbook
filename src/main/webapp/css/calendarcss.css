@@ -1,11 +1,16 @@
 @font-face {
-    font-family: 'GangwonEduPowerExtraBoldA';
+    font-family: 'ONE-Mobile-POP';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
-.tg  {border-collapse:collapse;border-spacing:0; width : 100%; font-family: 'GangwonEduPowerExtraBoldA';}
+.tg  {
+	border-collapse:collapse;
+	border-spacing:0;
+	width : 100%;
+	font-family: 'ONE-Mobile-POP';
+  }
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px; height : 120px;
   overflow:hidden;padding:10px 5px;word-break:normal;font-family: 'GangwonEduPowerExtraBoldA';}
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;

@@ -66,38 +66,36 @@
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
 	
-		<div id="layoutSidenav_content">
-			<div class="container p-5 ">
-				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
-					<br>
-					<h2>답변추가 페이지(관리자 전용)</h2>
-					<form action="<%=request.getContextPath()%>/admin/insertCommentAction.jsp" method="post">
-						<input type="number" name="helpNo" value="<%=helpNo%>" readonly="readonly" hidden="hidden">
-						<table class="styled-table">
-							
-							<thead>
-								<tr>
-									<td style="text-align : center; font-size : 15pt">문의내용</td>
-									<td><textarea rows="5" Style="width : 100%" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr>
-									<td style="text-align : center; font-size : 15pt">답변내용</td>
-									<td><textarea rows="5" Style="width : 100%" name="commentMemo"></textarea></td>
-								</tr>
-							</tbody>	
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2>답변추가 페이지(관리자 전용)</h2>
+			<form action="<%=request.getContextPath()%>/admin/insertCommentAction.jsp" method="post">
+				<input type="number" name="helpNo" value="<%=helpNo%>" readonly="readonly" hidden="hidden">
+				<table class="styled-table">
 					
-						</table>
-						
-						<div style="text-align : center">
-							<button type="submit" class="w-btn-outline w-btn-blue-outline">답변 입력</button>
-						</div>
-					</form>
+					<thead>
+						<tr>
+							<td style="text-align : center; font-size : 15pt">문의내용</td>
+							<td><textarea rows="5" Style="width : 100%" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td style="text-align : center; font-size : 15pt">답변내용</td>
+							<td><textarea rows="5" Style="width : 100%" name="commentMemo"></textarea></td>
+						</tr>
+					</tbody>	
+			
+				</table>
+				
+				<div style="text-align : center">
+					<button type="submit" class="w-btn-outline w-btn-blue-outline">답변 입력</button>
 				</div>
-			</div>
+			</form>
 		</div>
+	</div>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
