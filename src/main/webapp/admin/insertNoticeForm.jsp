@@ -29,6 +29,7 @@
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -40,6 +41,12 @@
 	}
 %>
 </script>
+<style>
+	table,th,td {
+		text-align : center ;
+		vertical-align : middle;
+	}
+</style>
 <title>공지추가 (관리자)</title>
 </head>
 <body>
@@ -48,26 +55,25 @@
 	
 	<div class="container px-4">
 		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-				<div class="card-header" style="margin-bottom : 20px;">
+			<div class="card-header" style="margin-bottom : 20px;">
 				<br>
 				<h2><i class="fas fa-table me-1"></i>
 					공지 추가
 				</h2>
 			</div>
-				<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
-					<table class="table">
-						<tr>
-							<th class="text center">공지 내용</th>
-							<td class="text center"><textarea name="noticeMemo" style="width : 100%"></textarea></td>
-						</tr>
-						
-						<tr>
-							<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">공지 추가</span></button></th>
-						</tr>
-						
-					</table>
-				</form>
-			</div>
+			
+			<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
+				<table class="table">
+					<tr>
+						<th style="vertical-align : middle;">공지 내용</th>
+						<td><textarea name="noticeMemo" style="width : 100%; height : 50pt"></textarea></td>
+					</tr>	
+				</table>
+				
+				<div style="text-align : center">
+					<button type="submit" class="w-btn-outline w-btn-blue-outline">공지추가</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	<!-- main end -->	

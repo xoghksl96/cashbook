@@ -38,25 +38,9 @@
 	}
 %>
 </script>	
-<Style>
-	.titleText {
-		font-size : 30pt;
-		font-weight : bolder;
-	}
-	.text {
-		font-size : 15pt;
-		font-weight : bold;
-	}
-	.center {
-		text-align : center;
-	}
-	.buttonSize {
-		width : 200px;
-	}
-</Style>
 <title>회원정보 수정 페이지</title>
 </head>
-<body>
+<body class="sb-nav-fixed">
 <%
 	if(loginMember.getMemberLevel() == 1) {
 %>
@@ -71,74 +55,33 @@
 	}
 %>
 	
-	<div id="layoutSidenav_content">
-		<div class="container p-5 ">
-			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
-				<div class="card shadow-lg border-0 rounded-lg mt-5">
-					<!-- 로그인 폼 -->
-					<div class="card-header"><h3 class="text-center font-weight-light my-4">회원 정보 수정</h3></div>
-					<div class="card-body">
-    					<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
-							<div class="form-floating mb-3">
-								<input class="form-control" style="background-color : pink" id="inputEmail" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"/>
-								<label for="inputEmail">ID</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input class="form-control" id="inputEmail" type="text" name="memberName"/>
-								<label for="inputEmail">NAME</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input class="form-control" id="inputPassword" type="password" name="memberPw"/>
-								<label for="inputPassword">PW</label>
-							</div>
-							<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-								<div style="text-align : right">
-									<button type="submit" class="btn btn-primary"><span class="text">회원정보 수정</span></button>
-								</div>
-							</div>
-						</form>
-					</div>	
-				</div>
-			</div>
+	<div class="container p-5 ">
+		<div class="card shadow-lg border-0 rounded-lg mt-5">
+			<!-- 로그인 폼 -->
+			<div class="card-header"><h3 class="text-center font-weight-light my-4">회원 정보 수정</h3></div>
+			<div class="card-body">
+  					<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
+					<div class="form-floating mb-3">
+						<input class="form-control" style="background-color : pink" id="inputEmail" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"/>
+						<label for="inputEmail">ID</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input class="form-control" id="inputEmail" type="text" name="memberName"/>
+						<label for="inputEmail">NAME</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPassword" type="password" name="memberPw"/>
+						<label for="inputPassword">PW</label>
+					</div>
+					<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+						<div style="text-align : right">
+							<button type="submit" class="btn btn-primary"><span class="text">회원정보 수정</span></button>
+						</div>
+					</div>
+				</form>
+			</div>	
 		</div>
 	</div>
-	<div class="container">
-	
-		<div class="p-5 bg-dark text-white text-center rounded">
-		  	<h1 class="titleText center">회원정보 수정</h1> 
-		</div>
-		
-		<br>
-		
-		<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
-			<table class="table">
-				
-				<tr>
-					<th class="text center">ID</th>
-					<!-- ID를 보여주지만, 수정불가 -->
-					<td class="text center"><input style="background-color : pink" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">PW</th>
-					<!-- 비밀번호를 입력하게끔 -->
-					<td class="text center"><input type="password" name="memberPw"></td>
-				</tr>
-				
-				<tr>
-					<th class="text center">NAME</th>
-					<!-- 현재 이름을 보여 주고 수정가능하게 끔 -->
-					<td class="text center"><input type="text" name="memberName" value="<%=loginMember.getMemberName()%>"></td>
-				</tr>
-				
-				<tr>
-					<th colspan="2" class="center"><button type="submit" class="buttonSize"><span class="text">회원 정보수정</span></button></th>
-				</tr>
-				
-			</table>
-		</form>
-	</div>
-	
 	<!-- main end -->	
 	<jsp:include page="/inc/memberCRUDBottom.jsp"></jsp:include>
 </body>

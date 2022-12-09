@@ -61,7 +61,7 @@
 									            <label for="inputEmail">ID</label>
 									        </div>
 									        <div class="form-floating mb-3">
-									            <input class="form-control" id="inputPassword" type="password" name="memberPw"/>
+									            <input class="form-control password" id="inputPassword" type="password" name="memberPw" style="font-family:'궁서체'; font-size:10pt;"/>
 									            <label for="inputPassword">PW</label>
 									        </div>
 									        
@@ -80,8 +80,8 @@
                         </div>
                     </div>
                 </main>
-        
-			<div id="layoutSidenav_content">>
+        	<br>
+			<div id="layoutSidenav_content">
 				<div class="card mb-4">
 					<div class="card-header">
 						<i class="fas fa-table me-1"></i>

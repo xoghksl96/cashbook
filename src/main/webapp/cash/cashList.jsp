@@ -91,6 +91,7 @@
 <link href="../css/styles.css" rel="stylesheet" />
 <link href="../css/calendarcss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/tablecss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -106,6 +107,9 @@
 <style>
 	td,th {
 		width : 14.25%
+	}
+	th {
+		text-align : center;
 	}
 </style>
 <title>가계부 페이지</title>
@@ -128,22 +132,23 @@
 			<br>
 			<div class="calendar-fluid shadow bg-white p-4">
 				<div class="d-flex align-items-center" style="margin-top : 5px"><i class="fa fa-calendar fa-3x mr-3"></i>
-					<h2 class="month font-weight-bold mb-0 text-uppercase" style="margin-top :10pt">&nbsp; <%=title%></h2>
+					<h2 class="month font-weight-bold mb-0 text-uppercase">&nbsp; <%=title%></h2>
 				</div>
 
 				<br>
 		
-				<table class="tg">				
-					<tr class="day-names list-unstyled">
-						<th style="color : red">일</th>	
-						<th>월</th>
-						<th>화</th>
-						<th>수</th>
-						<th>목</th>
-						<th>금</th>
-						<th style="color : blue">토</th>
-					</tr>
-
+				<table class="tg">
+					<thead>				
+						<tr class="day-names list-unstyled">
+							<th style="color : red">일</th>	
+							<th>월</th>
+							<th>화</th>
+							<th>수</th>
+							<th>목</th>
+							<th>금</th>
+							<th style="color : blue">토</th>
+						</tr>
+					</thead>
 					<tr>
 						<%
 							for(int i=1 ; i<=totalTd ; i++) {
@@ -199,7 +204,6 @@
 			
 		</div>
 	</div>
-</div>
 
 <!-- main end -->	
 <jsp:include page="/inc/layoutBottom.jsp"></jsp:include>

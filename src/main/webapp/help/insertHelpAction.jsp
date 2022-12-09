@@ -19,7 +19,8 @@
 		String targetUrl = "help/insertHelpForm.jsp";
 		
 		msg = URLEncoder.encode(msg, "utf-8");
-		response.sendRedirect(request.getContextPath()+targetUrl+"?msg="+msg);
+		response.sendRedirect(request.getContextPath() + targetUrl + "?msg=" + msg);
+		return;
 	}
 	
 	Help insertHelp = new Help();
@@ -27,16 +28,16 @@
 	insertHelp.setHelpMemo(request.getParameter("helpMemo"));
 	
 	// 2. Model호출
-	
 	HelpDao helpDao = new HelpDao();
 	
 	String msg = "문의 추가 실패...";
 	String targetUrl = "/help/insertHelpForm.jsp";
+	
 	if(helpDao.insertHelp(insertHelp)) {
 		msg = "문의 추가 성공!!!";
 		targetUrl = "/help/helpList.jsp";
 	}
 	
 	msg = URLEncoder.encode(msg, "utf-8");
-	response.sendRedirect(request.getContextPath()+targetUrl+"?msg="+msg);
+	response.sendRedirect(request.getContextPath() + targetUrl + "?msg=" + msg);
 %>

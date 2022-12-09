@@ -77,14 +77,14 @@
 					<thead>
 						<tr>
 							<td style="text-align : center; font-size : 15pt">문의내용</td>
-							<td><textarea rows="5" Style="width : 100%" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
+							<td><textarea rows="5" style="width : 100% ;text-align:center" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<tr>
 							<td style="text-align : center; font-size : 15pt">답변내용</td>
-							<td><textarea rows="5" Style="width : 100%" name="commentMemo"></textarea></td>
+							<td><textarea rows="5" style="width : 100% ;text-align:center" name="commentMemo"></textarea></td>
 						</tr>
 					</tbody>	
 			

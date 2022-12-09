@@ -10,7 +10,23 @@
 	// 1. Controller
 	
 	// 1-1
+	if(session.getAttribute("loginMember") == null) {
+		String msg = URLEncoder.encode("로그인이 필요한 서비스입니다.","utf-8");
+		
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg"+msg);
+		return;
+	}
+
 	Member loginMember = (Member)session.getAttribute("loginMember");
+
+	// 관리자 계정으로 로그인되어야만 접근 가능
+	String redirectUrl = null;
+	
+	if(loginMember.getMemberLevel() < 1) {
+		redirectUrl = "/cash/cashList.jsp";
+		response.sendRedirect(request.getContextPath()+redirectUrl);
+		return;
+	}
 
 	// 1-2
 	
@@ -73,7 +89,7 @@
 				<table id="datatablesSimple">
 					<thead>
 						<tr>
-							<th>문의 번호</th>
+							<th style="text-algin :center;">문의 번호</th>
 							<th>문의 내용</th>
 							<th>회원 ID</th>
 							<th>문의 날짜</th>
@@ -83,7 +99,7 @@
 			
 					<tfoot>
 						<tr>
-							<th>문의 번호</th>
+							<th style="text-algin :center;">문의 번호</th>
 							<th>문의 내용</th>
 							<th>회원 ID</th>
 							<th>문의 날짜</th>
@@ -96,7 +112,7 @@
 						for(HashMap<String, Object> m : list) {
 					%>
 							<tr>
-								<td><%=m.get("helpNo")%></td>
+								<td style="text-algin :center;"><%=m.get("helpNo")%></td>
 								<td><a href="<%=request.getContextPath()%>/admin/helpOne.jsp?helpNo=<%=m.get("helpNo")%>"><%=m.get("helpMemo")%></a></td>
 								<td><%=m.get("helpMemberId")%></td>
 								<td><%=m.get("helpCreatedate")%></td>

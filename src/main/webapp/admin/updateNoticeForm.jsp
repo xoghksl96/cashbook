@@ -46,6 +46,7 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
+<link href="../css/fontcss.css" rel="stylesheet"/>
 <link href="../css/buttoncss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -58,6 +59,12 @@
 	}
 %>
 </script>
+<style>
+	table,th,td {
+		text-align : center ;
+		vertical-align : middle;
+	}
+</style>
 <title>공지수정 (관리자)</title>
 </head>
 <body>
@@ -68,6 +75,7 @@
 		<div class="container p-5 ">
 			<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
 			<div class="card-header" style="margin-bottom : 20px;">
+				<br>
 				<h2><i class="fas fa-table me-1"></i>
 					공지사항
 				</h2>
@@ -76,13 +84,13 @@
 					<table class="table">	
 									
 						<tr>
-							<th class="text center">공지 번호</th>
-							<td class="text center"><input type="number" style="background-color : pink" name="noticeNo" value="<%=noticeNo%>" readonly="readonly"></td>
+							<th>공지 번호</th>
+							<td><input type="number" style="background-color : pink; width : 100% ; text-align : center" name="noticeNo" value="<%=noticeNo%>" readonly="readonly"></td>
 						</tr>
 						
 						<tr>
-							<th class="text center">공지 내용</th>
-							<td class="text center"><textarea  style="width : 100%" name="noticeMemo"><%=noticeMemo%></textarea></td>
+							<th>공지 내용</th>
+							<td><textarea  style="width : 100%; height : 50pt ;  text-align : center" name="noticeMemo"><%=noticeMemo%></textarea></td>
 						</tr>
 						
 					</table>

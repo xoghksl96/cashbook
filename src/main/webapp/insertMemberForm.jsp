@@ -50,14 +50,14 @@
 										<br>
 											
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" id="inputPassword" name="memberPw" type="password" placeholder="Password" />
+											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPassword" name="memberPw" type="password" placeholder="Password" />
 											<label for="inputPasswordConfirm">Password</label>
 										</div>
 										                                        
 										<br>
 											
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" id="inputPasswordCheck" name="memberPwCheck" type="password" placeholder="Password Check" />
+											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPasswordCheck" name="memberPwCheck" type="password" placeholder="Password Check" />
 											<label for="inputPasswordConfirm">Password Check</label>
 										</div>
 										                                        

@@ -72,63 +72,63 @@
 	<!-- main start -->	
 	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
 	
-			<div class="container px-4">
-				<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-					<br>
-					<h2>최근공지</h2>
-					<table class="styled-table">
-						<thead>
-							<tr>
-								<th>공지 번호</th>
-								<th>공지 내용</th>
-								<th>공지 날짜</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-						<%
-							for(Notice n : noticeList) {
-						%>
-								<tr>
-									<td><%=n.getNoticeNo()%></td>
-									<td><%=n.getNoticeMemo()%></td>
-									<td><%=n.getNoticecreatedate()%></td>
-								</tr>			
-						<%
-							}
-						%>
-						</tbody>
-					</table>
-				</div>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2>최근공지</h2>
+			<table class="styled-table">
+				<thead>
+					<tr>
+						<th>공지 번호</th>
+						<th>공지 내용</th>
+						<th>공지 날짜</th>
+					</tr>
+				</thead>
 				
-				<div class="shadow bg-white p-4">
-					<br>
-					<h2>최근 가입 멤버</h2>
-					<table class="styled-table">
-						<thead>
-							<tr>
-								<th>멤버 번호</th>
-								<th>멤버 ID</th>
-								<th>가입 날짜</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-						<%
-							for(Member m : memberList) {
-						%>
-								<tr>
-									<td><%=m.getMemberNo()%></td>
-									<td><%=m.getMemberId()%></td>
-									<td><%=m.getCreatedate()%></td>
-								</tr>			
-						<%
-							}
-						%>
-						</tbody>				
-					</table>
-				</div>
-			</div>
+				<tbody>
+				<%
+					for(Notice n : noticeList) {
+				%>
+						<tr>
+							<td><%=n.getNoticeNo()%></td>
+							<td><%=n.getNoticeMemo()%></td>
+							<td><%=n.getNoticecreatedate()%></td>
+						</tr>			
+				<%
+					}
+				%>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="shadow bg-white p-4">
+			<br>
+			<h2>최근 가입 멤버</h2>
+			<table class="styled-table">
+				<thead>
+					<tr>
+						<th>멤버 번호</th>
+						<th>멤버 ID</th>
+						<th>가입 날짜</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+				<%
+					for(Member m : memberList) {
+				%>
+						<tr>
+							<td><%=m.getMemberNo()%></td>
+							<td><%=m.getMemberId()%></td>
+							<td><%=m.getCreatedate()%></td>
+						</tr>			
+				<%
+					}
+				%>
+				</tbody>				
+			</table>
+		</div>
+	</div>
 		
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>	

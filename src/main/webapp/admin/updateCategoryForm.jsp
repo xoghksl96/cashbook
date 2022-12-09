@@ -60,6 +60,7 @@
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -74,41 +75,53 @@
 <title>카테고리 수정페이지(관리자 전용)</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/admin/updateCategoryAction.jsp"method="post">
-		<table>
-			<tr>
-				<td>카테고리 번호</td>
-				<td><input type="number" style="background-color : pink" name="categoryNo" value="<%=categoryOne.getCategoryNo()%>" readonly="readonly"></td>
-			</tr>
-			
-			<tr>
-				<td>수입 / 지출</td>
-				<td>
-					<%
-						if(categoryOne.getCategoryKind().equals("수입")) {
-					%>
-						<input type="radio" name="categoryKind" value="수입" checked>수입
-						<input type="radio" name="categoryKind" value="지출">지출
-					<%
-						} else {
-					%>
-						<input type="radio" name="categoryKind" value="수입">수입
-						<input type="radio" name="categoryKind" value="지출" checked>지출
-					<%	
-						}
-					%>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="categoryName" value="<%=categoryOne.getCategoryName()%>"></td>
-			</tr>
-			
-			<tr>
-				<td colspan="2"><button type="submit">카테고리 수정</button></td>
-			<tr>
-		</table>
-	</form>
+<!-- main start -->	
+<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+<div class="container px-4">
+	<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+		<br>
+		<h2>카테고리수정 페이지</h2>
+		<form action="<%=request.getContextPath()%>/admin/updateCategoryAction.jsp"method="post">
+			<table class="styled-table">
+				<thead>
+					<tr>
+						<td>카테고리 번호</td>
+						<th>수입 / 지출</th>
+						<th>이름</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td><input type="number" style="background-color : pink ;text-align : center ;" name="categoryNo" value="<%=categoryOne.getCategoryNo()%>" readonly="readonly"></td>
+						<td>
+							<%
+								if(categoryOne.getCategoryKind().equals("수입")) {
+							%>
+								<input type="radio" name="categoryKind" value="수입" checked>&nbsp;수입
+								&nbsp;
+								<input type="radio" name="categoryKind" value="지출">&nbsp;지출
+							<%
+								} else {
+							%>
+								<input type="radio" name="categoryKind" value="수입">&nbsp;수입
+								&nbsp;
+								<input type="radio" name="categoryKind" value="지출" checked>&nbsp;지출
+							<%	
+								}
+							%>
+						</td>
+						<td><input type="text" style="text-align : center ;"name="categoryName" value="<%=categoryOne.getCategoryName()%>"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="text-align : center">
+				<button type="submit" class="w-btn-outline w-btn-blue-outline">카테고리 수정</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- main end -->	
+<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
 </html>

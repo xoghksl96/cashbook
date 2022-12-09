@@ -134,7 +134,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<select name="categoryNo" style="height:50px;">
+								<select name="categoryNo" style="height:25px;">
 								<%
 									for(Category c : categoryList) {
 										if(c.getCategoryNo() == cashOne.getCategoryNo()) {

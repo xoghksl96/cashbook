@@ -50,6 +50,7 @@
 <link href="../css/styles.css" rel="stylesheet"/>
 <link href="../css/tablecss.css" rel="stylesheet"/>
 <link href="../css/fontcss.css" rel="stylesheet"/>
+<link href="../css/buttoncss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -61,80 +62,100 @@
 	}
 %>
 </script>
+<style>
+	table,th,td {
+		text-align : center;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body class="sb-nav-fixed">
-	<!-- main start -->	
-	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
-	<table border="1">		
-		<tr>
-			<th>문의 번호</th>
-			<th>문의 내용</th>
-			<th>문의 작성자</th>
-			<th>마지막 수정일</th>
-			<th>생성 일자</th>
-			<th>수정</th>
-			<th>삭제</th>
-		</tr>
+<!-- main start -->	
+<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<div class="card-header" style="margin-bottom : 20px;">
+			<br>
+			<h2><i class="fas fa-table me-1"></i>
+				고객문의
+			</h2>
+		</div>
 		
-		<tr>
-			<td><%=map.get("helpNo")%></td>
-			<td><%=map.get("helpMemo")%></td>
-			<td><%=map.get("helpMemberId")%></td>
-			<td><%=map.get("helpUpdatedate")%></td>
-			<td><%=map.get("helpCreatedate")%></td>
-			<%
-				if(map.get("commentMemo") == null) {
-			%>
-					<td><a href="<%=request.getContextPath()%>/help/updateHelpForm.jsp">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/help/deleteHelp.jsp?helpNo=<%=map.get("helpNo")%>">삭제</a></td>
-			<%
-				} else {
-			%>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-			<%
-				}
-			%>
-		</tr>			
-	</table>
-	
-	<br>
-	<br>
-	
-	<table border="1">		
-		<tr>
-			<th>COMMENT 내용</th>
-			<th>COMMENT 작성자</th>
-			<th>COMMENT 수정일</th>
-			<th>COMMENT 작성일</th>
-		</tr>
+		<table class="styled-table">
+			<thead>
+				<tr>
+					<th>문의 번호</th>
+					<th style="width : 40%">문의 내용</th>
+					<th>문의 작성자</th>
+					<th>마지막 수정일</th>
+					<th>생성 일자</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td><%=map.get("helpNo")%></td>
+					<td><%=map.get("helpMemo")%></td>
+					<td><%=map.get("helpMemberId")%></td>
+					<td><%=map.get("helpUpdatedate")%></td>
+					<td><%=map.get("helpCreatedate")%></td>
+					<%
+						if(map.get("commentMemo") == null) {
+					%>
+							<td><a href="<%=request.getContextPath()%>/help/updateHelpForm.jsp?helpNo=<%=map.get("helpNo")%>">수정</a></td>
+							<td><a href="<%=request.getContextPath()%>/help/deleteHelp.jsp?helpNo=<%=map.get("helpNo")%>">삭제</a></td>
+					<%
+						} else {
+					%>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+					<%
+						}
+					%>
+				</tr>
+			</tbody>					
+		</table>
 		
-		<tr>
-			<%
-				if(map.get("commentMemo") == null) {
-			%>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-			<%
-				} else {
-			%>
-					<td><%=map.get("commentMemo")%></td>
-					<td><%=map.get("commentMemberId")%></td>
-					<td><%=map.get("commentUpdatedate")%></td>
-					<td><%=map.get("commentCreatedate")%></td>
-			<%
-				}
-			%>
-		</tr>			
-	</table>
+		<br>
+		
+		<table class="styled-table">
+			<thead>
+				<tr>
+					<th style="width : 60%">COMMENT 내용</th>
+					<th>COMMENT 작성자</th>
+					<th>COMMENT 수정일</th>
+					<th>COMMENT 작성일</th>
+				</tr>
+			</thead>		
+			
+			<tbody>
+				<tr>
+					<%
+						if(map.get("commentMemo") == null) {
+					%>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+					<%
+						} else {
+					%>
+							<td><%=map.get("commentMemo")%></td>
+							<td><%=map.get("commentMemberId")%></td>
+							<td><%=map.get("commentUpdatedate")%></td>
+							<td><%=map.get("commentCreatedate")%></td>
+					<%
+						}
+					%>
+				</tr>
+			</tbody>			
+		</table>
+	</div>
+	</div>
 	
-	
-	<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
-	
-	<!-- main end -->	
-	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
+<!-- main end -->	
+<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>

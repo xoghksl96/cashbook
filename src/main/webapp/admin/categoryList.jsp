@@ -9,16 +9,19 @@
 	request.setCharacterEncoding("utf-8");
 
 	// 1.controller
-	
+	if(session.getAttribute("loginMember") == null) {
+		String msg = URLEncoder.encode("로그인이 필요한 서비스입니다.","utf-8");
+		
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg"+msg);
+		return;
+	}
+
 	Member loginMember = (Member)session.getAttribute("loginMember");
 
 	// 관리자 계정으로 로그인되어야만 접근 가능
 	String redirectUrl = null;
-	if(loginMember == null) {
-		redirectUrl = "/loginForm.jsp";
-		response.sendRedirect(request.getContextPath()+redirectUrl);
-		return;
-	} else if(loginMember.getMemberLevel() < 1) {
+	
+	if(loginMember.getMemberLevel() < 1) {
 		redirectUrl = "/cash/cashList.jsp";
 		response.sendRedirect(request.getContextPath()+redirectUrl);
 		return;
@@ -57,69 +60,68 @@
 <title>카테고리 관리페이지(관리자 전용)</title>
 </head>
 <body>
-	<!-- main start -->	
-	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+<!-- main start -->	
+<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+
+<div class="container px-4">
+	<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+		<div class="card-header" style="margin-bottom : 20px;">
+			<br>
+			<h2><i class="fas fa-table me-1"></i>
+				카테고리
+			</h2>
+		</div>
+		
+		<table id="datatablesSimple">
+			<thead>
+				<tr>
+					<th>카테고리 번호</th>
+					<th>카테고리 종류</th>
+					<th>카테고리 이름</th>
+					<th>최근 수정 날짜</th>
+					<th>생성 날짜</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
 	
-	<div class="container px-4">
-		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-				<div class="card-header" style="margin-bottom : 20px;">
-					<br>
-					<h2><i class="fas fa-table me-1"></i>
-						카테고리
-					</h2>
-				</div>
-				
-				<table id="datatablesSimple">
-					<thead>
-						<tr>
-							<th>카테고리 번호</th>
-							<th>카테고리 종류</th>
-							<th>카테고리 이름</th>
-							<th>최근 수정 날짜</th>
-							<th>생성 날짜</th>
-							<th>수정</th>
-							<th>삭제</th>
-						</tr>
-					</thead>
-			
-					<tfoot>
-						<tr>
-							<th>카테고리 번호</th>
-							<th>카테고리 종류</th>
-							<th>카테고리 이름</th>
-							<th>최근 수정 날짜</th>
-							<th>생성 날짜</th>
-							<th>수정</th>
-							<th>삭제</th>
-						</tr>
-					</tfoot>
-			
-					 <tbody>
-					<%
-						for(Category c : list) {
-					%>
-							<tr>
-								<td><%=c.getCategoryNo()%></td>
-								<td><%=c.getCategoryName()%></td>
-								<td><%=c.getCategoryKind()%></td>
-								<td><%=c.getUpdatedate()%></td>
-								<td><%=c.getCreatedate()%></td>
-								<td><a href="<%=request.getContextPath()%>/admin/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">수정</a></td>
-								<td><a href="<%=request.getContextPath()%>/admin/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">삭제</a></td>
-							</tr>			
-					<%
-						}
-					%>
-					</tbody>
-				</table>
-				<div style="text-align : center">
-					<a type="button" class="w-btn-outline w-btn-blue-outline" href="<%=request.getContextPath()%>/admin/insertCategoryForm.jsp">카테고리 추가</a>
-				</div>
-			</div>
+			<tfoot>
+				<tr>
+					<th>카테고리 번호</th>
+					<th>카테고리 종류</th>
+					<th>카테고리 이름</th>
+					<th>최근 수정 날짜</th>
+					<th>생성 날짜</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</tfoot>
+	
+			 <tbody>
+			<%
+				for(Category c : list) {
+			%>
+					<tr>
+						<td><%=c.getCategoryNo()%></td>
+						<td><%=c.getCategoryName()%></td>
+						<td><%=c.getCategoryKind()%></td>
+						<td><%=c.getUpdatedate()%></td>
+						<td><%=c.getCreatedate()%></td>
+						<td><a href="<%=request.getContextPath()%>/admin/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>">수정</a></td>
+						<td><a href="<%=request.getContextPath()%>/admin/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">삭제</a></td>
+					</tr>			
+			<%
+				}
+			%>
+			</tbody>
+		</table>
+		<div style="text-align : center">
+			<a type="button" class="w-btn-outline w-btn-blue-outline" href="<%=request.getContextPath()%>/admin/insertCategoryForm.jsp">카테고리 추가</a>
 		</div>
 	</div>
-	
-	<!-- main end -->	
-	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
+</div>
+
+<!-- main end -->	
+<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
 </html>

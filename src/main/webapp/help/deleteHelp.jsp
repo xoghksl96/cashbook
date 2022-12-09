@@ -12,7 +12,7 @@
 	
 	// 1-2 request
 	if(request.getParameter("helpNo") == null || request.getParameter("helpNo").equals("")) {
-		String targetUrl = "/helpOne.jsp";
+		String targetUrl = "/help/helpOne.jsp";
 		response.sendRedirect(request.getContextPath()+targetUrl+"?helpNo="+request.getParameter("helpNo"));
 	}
 	
@@ -26,11 +26,11 @@
 	HelpDao deleteHelpDao = new HelpDao();
 	
 	String msg = "문의 삭제 실패...";
-	String targetUrl = "/helpOne.jsp";
+	String targetUrl = "/help/helpOne.jsp";
 	
 	if(deleteHelpDao.deleteHelp(deleteHelp)) {
 		msg = "문의 삭제 성공!!!";
-		targetUrl = "/helpOne.jsp";
+		targetUrl = "/help/helpList.jsp";
 	}
 	
 	msg = URLEncoder.encode(msg, "utf-8");

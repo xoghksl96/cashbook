@@ -77,6 +77,9 @@
 	th,td {
 		text-align : center;
 	}
+	.cashMemo {
+	 width : 70%
+	}
 </style>
 <script type="text/javascript">
 <%
@@ -173,7 +176,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<select name="categoryNo" style="height : 50px ; font-size : 10pt">
+								<select name="categoryNo" style="height : 25px ; font-size : 10pt">
 								<%
 									for(Category c : categoryList) {
 								%>

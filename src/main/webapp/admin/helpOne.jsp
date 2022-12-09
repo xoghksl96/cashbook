@@ -7,8 +7,25 @@
 <%
 	// 한글처리
 	request.setCharacterEncoding("utf-8");
-	// 1-1 세션 확인
 
+	// 1-1 세션 확인
+	if(session.getAttribute("loginMember") == null) {
+		String msg = URLEncoder.encode("로그인이 필요한 서비스입니다.","utf-8");
+		
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg"+msg);
+		return;
+	}
+
+	Member loginMember = (Member)session.getAttribute("loginMember");
+
+	// 관리자 계정으로 로그인되어야만 접근 가능
+	String redirectUrl = null;
+	
+	if(loginMember.getMemberLevel() < 1) {
+		redirectUrl = "/cash/cashList.jsp";
+		response.sendRedirect(request.getContextPath()+redirectUrl);
+		return;
+	}
 
 	// 1-2 request
 	if(request.getParameter("helpNo") == null || request.getParameter("helpNo").equals("")) {
