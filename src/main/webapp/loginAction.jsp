@@ -13,7 +13,7 @@
 	// Form 으로 부터 입력받은 값이 null 또는 "" 일때
 	if(request.getParameter("memberId") == null || request.getParameter("memberPw") == null ||
 		request.getParameter("memberId").equals("") || request.getParameter("memberPw").equals("")) {
-			
+		System.out.println("sdasdaas");	
 		String msg = URLEncoder.encode("ID와 PW 모두 입력해주세요", "utf-8");
 		
 		String targetUrl = "/loginForm.jsp";

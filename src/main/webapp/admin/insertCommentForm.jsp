@@ -70,32 +70,49 @@
 		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
 			<br>
 			<h2>답변추가 페이지(관리자 전용)</h2>
-			<form action="<%=request.getContextPath()%>/admin/insertCommentAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/admin/insertCommentAction.jsp" method="post" id="insertCommentForm">
 				<input type="number" name="helpNo" value="<%=helpNo%>" readonly="readonly" hidden="hidden">
 				<table class="styled-table">
 					
 					<thead>
 						<tr>
 							<td style="text-align : center; font-size : 15pt">문의내용</td>
-							<td><textarea rows="5" style="width : 100% ;text-align:center" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
+							<td><textarea rows="5" style="width : 100% ;text-align:center" id="helpMemo" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<tr>
 							<td style="text-align : center; font-size : 15pt">답변내용</td>
-							<td><textarea rows="5" style="width : 100% ;text-align:center" name="commentMemo"></textarea></td>
+							<td><textarea rows="5" style="width : 100% ;text-align:center" id="commentMemo" name="commentMemo"></textarea></td>
 						</tr>
 					</tbody>	
 			
 				</table>
 				
 				<div style="text-align : center">
-					<button type="submit" class="w-btn-outline w-btn-blue-outline">답변 입력</button>
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="insertCommentBtn">답변 입력</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	
+	<script>
+		let insertCommentBtn = document.querySelector('#insertCommentBtn');
+		
+		insertCommentBtn.addEventListener('click', function(){
+			
+			let commentMemo = document.querySelector('#commentMemo');
+			if(commentMemo.value == '') {
+				alert('답변을 입력하세요');
+				commentMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let insertCommentForm = document.querySelector('#insertCommentForm');
+			insertCommentForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>

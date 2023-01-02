@@ -97,8 +97,7 @@ public class NoticeDao {
 		
 		try {
 			String sqlSelect = "SELECT notice_no noticeNo, notice_memo noticeMemo, createdate "
-					+ "FROM notice "
-					+ "ORDER BY createdate DESC ";
+					+ "FROM notice ";
 			
 			conn = dbUtil.getConnection();
 			stmtSelect = conn.prepareStatement(sqlSelect);

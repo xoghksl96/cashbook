@@ -157,7 +157,7 @@
 			<br>
 			<h2>가계부 작성</h2>
 			<!-- cash 입력 -->
-			<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post" id="insertCashForm">
 				<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
 				<input type="hidden" name="year" value="<%=year%>"> 
 				<input type="hidden" name="month" value="<%=month%>"> 
@@ -176,11 +176,12 @@
 					<tbody>
 						<tr>
 							<td>
-								<select name="categoryNo" style="height : 25px ; font-size : 10pt">
+								<select id="categoryNo" class="categoryNo" name="categoryNo" style="height : 25px ; font-size : 10pt">
+									<option value="">==선택==</option>
 								<%
 									for(Category c : categoryList) {
 								%>
-										<option value="<%=c.getCategoryNo()%>">
+										<option class="categoryNo" value="<%=c.getCategoryNo()%>">
 											[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
 										</option>
 								<%
@@ -189,18 +190,45 @@
 								</select>
 							</td>
 							<td><input type="text" name="cashDate" value="<%=year%>-<%=month%>-<%=date%>" readonly="readonly"></td>
-							<td><input type="number" name="cashPrice" value=""></td>
-							<td><textarea rows="3" cols="50" name="cashMemo"></textarea></td>
+							<td><input type="number" id="cashPrice" name="cashPrice" value=""></td>
+							<td><textarea rows="3" cols="50" id="cashMemo" name="cashMemo"></textarea></td>
 						</tr>
 					</tbody>				
 				</table>
 					
 				<div style="text-align : center">
-					<Button type="submit" class="w-btn-outline w-btn-blue-outline">작성</Button>
+					<Button type="button" class="w-btn-outline w-btn-blue-outline" id="insertCashBtn">작성</Button>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		let insertCashBtn = document.querySelector('#insertCashBtn');
+		
+		insertCashBtn.addEventListener('click', function(){
+
+			let categoryNo = document.querySelectorAll('.categoryNo:checked')
+			if(categoryNo.length != 1) {
+				alert('카테고리를 선택하세요');
+				return;
+			}
+			let cashPrice = document.querySelector('#cashPrice');
+			if(cashPrice.value == '') {
+				alert('금액을 입력하세요');
+				cashPrice.focus(); // 커서이동
+				return;
+			}
+			let cashMemo = document.querySelector('#cashMemo');
+			if(cashMemo.value == '') {
+				alert('가계부 내용을 입력하세요');
+				cashMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let insertCashForm = document.querySelector('#insertCashForm');
+			insertCashForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>

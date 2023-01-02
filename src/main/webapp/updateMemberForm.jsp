@@ -60,28 +60,49 @@
 			<!-- 로그인 폼 -->
 			<div class="card-header"><h3 class="text-center font-weight-light my-4">회원 정보 수정</h3></div>
 			<div class="card-body">
-  					<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
+  					<form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post" id="updateForm">
 					<div class="form-floating mb-3">
 						<input class="form-control" style="background-color : pink" id="inputEmail" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"/>
 						<label for="inputEmail">ID</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input class="form-control" id="inputEmail" type="text" name="memberName"/>
+						<input class="form-control" id="memberName" type="text" name="memberName"/>
 						<label for="inputEmail">NAME</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPassword" type="password" name="memberPw"/>
+						<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="memberPw" type="password" name="memberPw"/>
 						<label for="inputPassword">PW</label>
 					</div>
 					<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-						<div style="text-align : right">
-							<button type="submit" class="btn btn-primary"><span class="text">회원정보 수정</span></button>
-						</div>
+						<button type="button" class="btn btn-primary" id="updateMemberBtn"><span class="text">회원정보 수정</span></button>
 					</div>
 				</form>
 			</div>	
 		</div>
 	</div>
+	
+	<script>
+		let updateMemberBtn = document.querySelector('#updateMemberBtn');
+		
+		updateMemberBtn.addEventListener('click', function(){
+			
+			let name = document.querySelector('#memberName');
+			if(name.value == '') {
+				alert('이름을 입력하세요');
+				name.focus(); // 커서이동
+				return;
+			}
+			let pw = document.querySelector('#memberPw');
+			if(pw.value == '') {
+				alert('비밀번호를 입력하세요');
+				pw.focus(); // 커서이동
+				return;
+			}
+			
+			let updateForm = document.querySelector('#updateForm');
+			updateForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/memberCRUDBottom.jsp"></jsp:include>
 </body>

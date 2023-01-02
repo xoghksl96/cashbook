@@ -33,6 +33,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 가계부
                             </a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/stats/statsByYear.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                연도별 통계
+                            </a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/stats/statsByMonthSelectYear.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                월별 통계
+                            </a>
                             <a class="nav-link" href="<%=request.getContextPath()%>/help/helpList.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 고객센터

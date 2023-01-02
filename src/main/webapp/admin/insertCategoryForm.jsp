@@ -53,39 +53,64 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- main start -->	
-<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
-<div class="container px-4">
-	<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-		<br>
-		<h2>카테고리추가 페이지</h2>
-		<form action="<%=request.getContextPath()%>/admin/insertCategoryAction.jsp"method="post">
-			<table class="styled-table">
-				<thead>
-					<tr>
-						<th>수입 / 지출</th>
-						<th>이름</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr>
-						<td>
-							<input type="radio" name="categoryKind" value="수입">&nbsp;수입
-							&nbsp;
-							<input type="radio" name="categoryKind" value="지출">&nbsp;지출
-						</td>
-						<td><input type="text" name="categoryName" value="" style="text-align : center ;"></td>
-					</tr>
-				</tbody>
-			</table>
-			<div style="text-align : center">
-				<button type="submit" class="w-btn-outline w-btn-blue-outline">카테고리 추가</button>
-			</div>
-		</form>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2>카테고리추가 페이지</h2>
+			<form action="<%=request.getContextPath()%>/admin/insertCategoryAction.jsp" method="post" id="insertCategoryForm">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<th>수입 / 지출</th>
+							<th>이름</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td>
+								<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="수입">&nbsp;수입
+								&nbsp;
+								<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="지출">&nbsp;지출
+							</td>
+							<td><input type="text" id="categoryName" name="categoryName" value="" style="text-align : center ;"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="text-align : center">
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="insertCategoryBtn">카테고리 추가</button>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-<!-- main end -->	
-<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
+	
+	<script>
+		let insertCategoryBtn = document.querySelector('#insertCategoryBtn');
+		
+		insertCategoryBtn.addEventListener('click', function(){
+			
+			let categoryKind = document.querySelectorAll('.categoryKind:checked'); // querySelectorAll의 반환타입은 배열(태그의배열)
+			console.log(categoryKind.length); // 1
+			if(categoryKind.length != 1) {
+				alert('수입/지출을 선택하세요');
+				return;
+			}
+
+			let categoryName = document.querySelector('#categoryName');
+			if(categoryName.value == '') {
+				alert('카테고리 명을 입력하세요');
+				categoryName.focus(); // 커서이동
+				return;
+			}
+			
+			let insertCategoryForm = document.querySelector('#insertCategoryForm');
+			insertCategoryForm.submit();
+		});
+	</script>
+		
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
 </html>

@@ -62,20 +62,36 @@
 				</h2>
 			</div>
 			
-			<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post" id="insertNoticeForm">
 				<table class="table">
 					<tr>
 						<th style="vertical-align : middle;">공지 내용</th>
-						<td><textarea name="noticeMemo" style="width : 100%; height : 50pt"></textarea></td>
+						<td><textarea id="noticeMemo" name="noticeMemo" style="width : 100%; height : 50pt"></textarea></td>
 					</tr>	
 				</table>
 				
 				<div style="text-align : center">
-					<button type="submit" class="w-btn-outline w-btn-blue-outline">공지추가</button>
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="insertNoticeBtn">공지추가</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		let insertNoticeBtn = document.querySelector('#insertNoticeBtn');
+		
+		insertNoticeBtn.addEventListener('click', function(){
+
+			let noticeMemo = document.querySelector('#noticeMemo');
+			if(noticeMemo.value == '') {
+				alert('공지내용을 입력하세요');
+				noticeMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let insertNoticeForm = document.querySelector('#insertNoticeForm');
+			insertNoticeForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>

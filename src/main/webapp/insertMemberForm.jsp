@@ -41,36 +41,36 @@
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header"><h3 class="text-center font-weight-light my-4">회원가입</h3></div>
 								<div class="card-body">
-									<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">  
+									<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post" id="insertMemberForm">  
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" id="inputId" name="memberId" type="text" placeholder="Id" />
+											<input class="form-control" id="memberId" name="memberId" type="text" placeholder="Id" />
 											<label for="inputId">ID</label>
 										</div>
 										                            		    
 										<br>
 											
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPassword" name="memberPw" type="password" placeholder="Password" />
+											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="memberPw" name="memberPw" type="password" placeholder="Password" />
 											<label for="inputPasswordConfirm">Password</label>
 										</div>
 										                                        
 										<br>
 											
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="inputPasswordCheck" name="memberPwCheck" type="password" placeholder="Password Check" />
+											<input class="form-control" style="font-family:'궁서체'; font-size:10pt;" id="memberPwCheck" name="memberPwCheck" type="password" placeholder="Password Check" />
 											<label for="inputPasswordConfirm">Password Check</label>
 										</div>
 										                                        
 										<br>
 											
 										<div class="form-floating mb-3 mb-md-0">
-											<input class="form-control" id="inputName" name="memberName" type="text" placeholder="Enter your name" />
+											<input class="form-control" id="memberName" name="memberName" type="text" placeholder="Enter your name" />
 											<label for="inputName">NAME</label>
 										</div>
 						
 										<br>
 										<div class="mt-4 mb-0">
-											<div class="d-grid"><button type="submit" class="btn btn-primary btn-block">회원가입</button></div>
+											<div class="d-grid"><button type="button" class="btn btn-primary btn-block" id="insertMemberBtn">회원가입</button></div>
 										</div>
 	                                      </form>
 	                                  </div>
@@ -84,6 +84,46 @@
 			</main>
 		</div>
 	</div>
+	
+	<script>
+		let insertMemberBtn = document.querySelector('#insertMemberBtn');
+		
+		insertMemberBtn.addEventListener('click', function(){
+			
+			let memberId = document.querySelector('#memberId');
+			if(memberId.value == '') {
+				alert('아이디를 입력하세요');
+				memberId.focus(); // 커서이동
+				return;
+			}
+			let memberPw = document.querySelector('#memberPw');
+			if(memberPw.value == '') {
+				alert('비밀번호를 입력하세요');
+				memberPw.focus(); // 커서이동
+				return;
+			}
+			let memberPwCheck = document.querySelector('#memberPwCheck');
+			if(memberPwCheck.value == '') {
+				alert('비밀번호 확인을 입력하세요');
+				memberPwCheck.focus(); // 커서이동
+				return;
+			}
+			if(memberPw.value != memberPwCheck.value) {
+				alert('두 비밀번호가 일치하지 않습니다.');
+				memberPw.focus(); // 커서이동
+				return;
+			}
+			let memberName = document.querySelector('#memberName');
+			if(memberName.value == '') {
+				alert('이름을 입력하세요');
+				memberName.focus(); // 커서이동
+				return;
+			}
+			
+			let insertMemberForm = document.querySelector('#insertMemberForm');
+			insertMemberForm.submit();
+		});
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

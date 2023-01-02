@@ -70,32 +70,49 @@
 				<div class="shadow bg-white p-3" style="margin-bottom : 50px;">
 				<br>
 				<h2>답변수정 페이지(관리자 전용)</h2>
-				<form action="<%=request.getContextPath()%>/admin/updateCommentAction.jsp" method="post">
+				<form action="<%=request.getContextPath()%>/admin/updateCommentAction.jsp" method="post" id="updateCommentForm">
 					<input type="number" style="background-color : pink" name="helpNo" value="<%=helpNo%>" readonly="readonly" hidden="hidden">
 					<input type="number" style="background-color : pink" name="commentNo" value="<%=commentNo%>" readonly="readonly" hidden="hidden">
 					<table class="styled-table">
 						<thead>
 							<tr>
 								<td style="text-align : center; font-size : 15pt">문의내용</td>
-								<td><textarea rows="5" style="width : 100% ;text-align:center" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
+								<td><textarea rows="5" style="width : 100% ;text-align:center"id="helpMemo" name="helpMemo" readonly="readonly"><%=helpMemo%></textarea></td>
 							</tr>
 						</thead>
 						
 						<tbody>
 							<tr>
 								<td style="text-align : center; font-size : 15pt">답변내용</td>
-								<td><textarea  rows="5" style="width : 100% ;text-align:center"name="commentMemo"><%=commentMemo%></textarea></td>
+								<td><textarea  rows="5" style="width : 100% ;text-align:center" id="commentMemo" name="commentMemo" ><%=commentMemo%></textarea></td>
 							</tr>
 						</tbody>						
 					</table>
 					
 					<div style="text-align : center">
-						<button type="submit" class="w-btn-outline w-btn-blue-outline">답변 수정</button>
+						<button type="button" class="w-btn-outline w-btn-blue-outline" id="updateCommentBtn">답변 수정</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		let updateCommentBtn = document.querySelector('#updateCommentBtn');
+		
+		updateCommentBtn.addEventListener('click', function(){
+			
+			let commentMemo = document.querySelector('#commentMemo');
+			if(commentMemo.value == '') {
+				alert('답변을 입력하세요');
+				commentMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let updateCommentForm = document.querySelector('#updateCommentForm');
+			updateCommentForm.submit();
+		});
+	</script>
 	
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>

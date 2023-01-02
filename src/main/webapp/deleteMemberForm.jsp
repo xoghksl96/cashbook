@@ -57,24 +57,39 @@
 			<!-- 로그인 폼 -->
 			<div class="card-header"><h3 class="text-center font-weight-light my-4">회원 탈퇴</h3></div>
 			<div class="card-body">
-  					<form action="<%=request.getContextPath()%>/deleteMemberAction.jsp" method="post">
+  					<form action="<%=request.getContextPath()%>/deleteMemberAction.jsp" method="post" id="deleteMemberForm">
 					<div class="form-floating mb-3">
-						<input class="form-control" style="background-color : pink" id="inputEmail" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"/>
+						<input class="form-control" style="background-color : pink" id="memberId" type="text" name="memberId" readonly="readonly" value="<%=loginMember.getMemberId()%>"/>
 						<label for="inputEmail">ID</label>
 					</div>
 					<div class="form-floating mb-3">
-						<input class="form-control" id="inputPassword" style="font-family:'궁서체'; font-size:10pt;" type="password" name="memberPw"/>
+						<input class="form-control" id="memberPw" style="font-family:'궁서체'; font-size:10pt;" type="password" name="memberPw"/>
 						<label for="inputPassword">PW</label>
 					</div>
 					<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-						<div style="text-align : right">
-							<button type="submit" class="btn btn-primary"><span class="text">회원 탈퇴</span></button>
-						</div>
+						<button type="button" class="btn btn-primary" id="deleteMemberBtn"><span class="text">회원 탈퇴</span></button>
 					</div>
 				</form>
 			</div>	
 		</div>
 	</div>
+	
+	<script>
+		let deleteMemberBtn = document.querySelector('#deleteMemberBtn');
+		
+		deleteMemberBtn.addEventListener('click', function(){
+			
+			let memberPw = document.querySelector('#memberPw');
+			if(memberPw.value == '') {
+				alert('현재 비밀번호를 입력하세요');
+				memberPw.focus(); // 커서이동
+				return;
+			}
+			
+			let deleteMemberForm = document.querySelector('#deleteMemberForm');
+			deleteMemberForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/memberCRUDBottom.jsp"></jsp:include>
 </body>

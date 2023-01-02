@@ -48,44 +48,61 @@
 <title>문의 추가 페이지</title>
 </head>
 <body class="sb-nav-fixed">
-<!-- main start -->	
-<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
-	<div class="container px-4">
-		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-			<div class="card-header" style="margin-bottom : 20px;">
-			<br>
-			<h2><i class="fas fa-table me-1"></i>
-				고객문의
-			</h2>
-		</div>
-		<form action="<%=request.getContextPath()%>/help/insertHelpAction.jsp" method="post">
-			<input type="text" name="memberId" value="<%=memberId%>" hidden="hidden">
-			<table class="styled-table">
-				<thead>
-					<tr>
-						<th>작성자</th>
-						<th style="width : 80%">문의 내용</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr>
-						<td><%=memberId%></td>
-						<td>
-							<textarea style="width : 100% ;height : 50pt;text-align:center" name="helpMemo"></textarea>
-						</td>
-					</tr>
-				</tbody>					
-			</table>
-			
-			<div style="text-align : center">
-				<button type="submit" class="w-btn-outline w-btn-blue-outline">문의 작성</button>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+		<div class="container px-4">
+			<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+				<div class="card-header" style="margin-bottom : 20px;">
+				<br>
+				<h2><i class="fas fa-table me-1"></i>
+					고객문의
+				</h2>
 			</div>
-		</form>
-		<br>
+			<form action="<%=request.getContextPath()%>/help/insertHelpAction.jsp" method="post" id="insertHelpForm">
+				<input type="text" name="memberId" value="<%=memberId%>" hidden="hidden">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<th>작성자</th>
+							<th style="width : 80%">문의 내용</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td><%=memberId%></td>
+							<td>
+								<textarea style="width : 100% ;height : 50pt;text-align:center" id="helpMemo" name="helpMemo"></textarea>
+							</td>
+						</tr>
+					</tbody>					
+				</table>
+				
+				<div style="text-align : center">
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="insertHelpBtn">문의 작성</button>
+				</div>
+			</form>
+			<br>
+		</div>
 	</div>
-</div>	
-<!-- main end -->	
-<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
+	
+	<script>
+		let insertHelpBtn = document.querySelector('#insertHelpBtn');
+		
+		insertHelpBtn.addEventListener('click', function(){
+
+			let helpMemo = document.querySelector('#helpMemo');
+			if(helpMemo.value == '') {
+				alert('문의내용을 입력하세요');
+				helpMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let insertHelpForm = document.querySelector('#insertHelpForm');
+			insertHelpForm.submit();
+		});
+	</script>	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>

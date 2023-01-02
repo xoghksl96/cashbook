@@ -116,7 +116,7 @@
 		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
 			<br>
 			<h2 style="margin-left : 2% ; margin-top : 2%"><%=title%></h2>
-			<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post">
+			<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post" id="updateCashForm">
 				<input type="hidden" name="cashNo" value="<%=cashNo%>"> 
 				<input type="hidden" name="year" value="<%=year%>"> 
 				<input type="hidden" name="month" value="<%=month%>"> 
@@ -134,12 +134,13 @@
 					<tbody>
 						<tr>
 							<td>
-								<select name="categoryNo" style="height:25px;">
+								<select id="categoryNo" class="categoryNo" name="categoryNo" style="height:25px;">
+									<option value="">==선택==</option>
 								<%
 									for(Category c : categoryList) {
 										if(c.getCategoryNo() == cashOne.getCategoryNo()) {
 								%>
-											<option value="<%=c.getCategoryNo()%>" selected>
+											<option class="categoryNo" value="<%=c.getCategoryNo()%>" selected>
 												[<%=c.getCategoryKind()%>] <%=c.getCategoryName()%>
 											</option>
 								<%
@@ -154,20 +155,47 @@
 								%>
 								</select>
 							</td>
-							<td><input type="text" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
-							<td><input type="number" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
-							<td><textarea rows="3" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
+							<td><input type="text" id="cashDate" name="cashDate" value="<%=cashOne.getCashDate()%>" readonly="readonly"></td>
+							<td><input type="number" id="cashPrice" name="cashPrice" value="<%=cashOne.getCashPrice()%>"></td>
+							<td><textarea rows="3" id="cashMemo" cols="50" name="cashMemo"><%=cashOne.getCashMemo()%></textarea></td>
 						</tr>
 					</tbody>
 					
 				</table>
 				
 				<div style="text-align : center">
-					<Button type="submit" class="w-btn-outline w-btn-blue-outline">수정</Button>
+					<Button type="button" class="w-btn-outline w-btn-blue-outline" id="updateCashBtn">수정</Button>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		let updateCashBtn = document.querySelector('#updateCashBtn');
+		
+		updateCashBtn.addEventListener('click', function(){
+
+			let categoryNo = document.querySelectorAll('.categoryNo:checked')
+			if(categoryNo.length != 1) {
+				alert('카테고리를 선택하세요');
+				return;
+			}
+			let cashPrice = document.querySelector('#cashPrice');
+			if(cashPrice.value == '') {
+				alert('금액을 입력하세요');
+				cashPrice.focus(); // 커서이동
+				return;
+			}
+			let cashMemo = document.querySelector('#cashMemo');
+			if(cashMemo.value == '') {
+				alert('가계부 내용을 입력하세요');
+				cashMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let updateCashForm = document.querySelector('#updateCashForm');
+			updateCashForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>

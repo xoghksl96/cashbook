@@ -80,7 +80,7 @@
 					공지사항
 				</h2>
 			</div>
-				<form action="<%=request.getContextPath()%>/admin/updateNoticeAction.jsp" method="post">
+				<form action="<%=request.getContextPath()%>/admin/updateNoticeAction.jsp" method="post" id="updateNoticeForm">
 					<table class="table">	
 									
 						<tr>
@@ -90,19 +90,34 @@
 						
 						<tr>
 							<th>공지 내용</th>
-							<td><textarea  style="width : 100%; height : 50pt ;  text-align : center" name="noticeMemo"><%=noticeMemo%></textarea></td>
+							<td><textarea  style="width : 100%; height : 50pt ;  text-align : center" id="noticeMemo" name="noticeMemo"><%=noticeMemo%></textarea></td>
 						</tr>
 						
 					</table>
 			
 					<div style="text-align : center">
-						<Button type="submit" class="w-btn-outline w-btn-blue-outline">공지 수정</Button>
+						<Button type="button" class="w-btn-outline w-btn-blue-outline" id="updateNoticeBtn">공지 수정</Button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+	<script>
+		let updateNoticeBtn = document.querySelector('#updateNoticeBtn');
+		
+		updateNoticeBtn.addEventListener('click', function(){
+
+			let noticeMemo = document.querySelector('#noticeMemo');
+			if(noticeMemo.value == '') {
+				alert('공지내용을 입력하세요');
+				noticeMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let updateNoticeForm = document.querySelector('#updateNoticeForm');
+			updateNoticeForm.submit();
+		});
+	</script>
 	<!-- main end -->	
 	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>

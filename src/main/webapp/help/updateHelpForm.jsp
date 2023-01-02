@@ -65,50 +65,68 @@
 <title>Insert title here</title>
 </head>
 <body class="sb-nav-fixed">
-<!-- main start -->	
-<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
-	<div class="container px-4">
-		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-			<div class="card-header" style="margin-bottom : 20px;">
-			<br>
-			<h2><i class="fas fa-table me-1"></i>
-				고객문의
-			</h2>
-		</div>
-		<form action="<%=request.getContextPath()%>/help/updateHelpAction.jsp" method="post">
-			<input type="number" name="helpNo" value="<%=map.get("helpNo")%>" hidden="hidden">
-			<table class="styled-table">
-				<thead>
-					<tr>
-						<th>문의 번호</th>
-						<th style="width : 50%">문의 내용</th>
-						<th>문의 작성자</th>
-						<th>마지막 수정일</th>
-						<th>생성 일자</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr>
-						<td><%=map.get("helpNo")%></td>
-						<td>
-							<textarea style="width : 100% ;height : 50pt;text-align:center" name="helpMemo"><%=map.get("helpMemo")%></textarea>
-						</td>
-						<td><%=map.get("helpMemberId")%></td>
-						<td><%=map.get("helpUpdatedate")%></td>
-						<td><%=map.get("helpCreatedate")%></td>
-					</tr>
-				</tbody>					
-			</table>
-			
-			<div style="text-align : center">
-				<button type="submit" class="w-btn-outline w-btn-blue-outline">문의 수정</button>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTop.jsp"></jsp:include>
+		<div class="container px-4">
+			<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+				<div class="card-header" style="margin-bottom : 20px;">
+				<br>
+				<h2><i class="fas fa-table me-1"></i>
+					고객문의
+				</h2>
 			</div>
-		</form>
-		<br>
+			<form action="<%=request.getContextPath()%>/help/updateHelpAction.jsp" method="post" id="insertHelpForm">
+				<input type="number" name="helpNo" value="<%=map.get("helpNo")%>" hidden="hidden">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<th>문의 번호</th>
+							<th style="width : 50%">문의 내용</th>
+							<th>문의 작성자</th>
+							<th>마지막 수정일</th>
+							<th>생성 일자</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td><%=map.get("helpNo")%></td>
+							<td>
+								<textarea style="width : 100% ;height : 50pt;text-align:center" id="helpMemo" name="helpMemo"><%=map.get("helpMemo")%></textarea>
+							</td>
+							<td><%=map.get("helpMemberId")%></td>
+							<td><%=map.get("helpUpdatedate")%></td>
+							<td><%=map.get("helpCreatedate")%></td>
+						</tr>
+					</tbody>					
+				</table>
+				
+				<div style="text-align : center">
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="updateHelpBtn">문의 수정</button>
+				</div>
+			</form>
+			<br>
+		</div>
 	</div>
-</div>	
-<!-- main end -->	
-<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
+	
+	<script>
+		let updateHelpBtn = document.querySelector('#updateHelpBtn');
+		
+		updateHelpBtn.addEventListener('click', function(){
+	
+			let helpMemo = document.querySelector('#helpMemo');
+			console
+			if(helpMemo.value == '') {
+				alert('문의내용을 입력하세요');
+				helpMemo.focus(); // 커서이동
+				return;
+			}
+			
+			let insertHelpForm = document.querySelector('#insertHelpForm');
+			insertHelpForm.submit();
+		});
+	</script>		
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottom.jsp"></jsp:include>
 </body>
 </html>

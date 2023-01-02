@@ -75,53 +75,77 @@
 <title>카테고리 수정페이지(관리자 전용)</title>
 </head>
 <body>
-<!-- main start -->	
-<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
-<div class="container px-4">
-	<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
-		<br>
-		<h2>카테고리수정 페이지</h2>
-		<form action="<%=request.getContextPath()%>/admin/updateCategoryAction.jsp"method="post">
-			<table class="styled-table">
-				<thead>
-					<tr>
-						<td>카테고리 번호</td>
-						<th>수입 / 지출</th>
-						<th>이름</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<tr>
-						<td><input type="number" style="background-color : pink ;text-align : center ;" name="categoryNo" value="<%=categoryOne.getCategoryNo()%>" readonly="readonly"></td>
-						<td>
-							<%
-								if(categoryOne.getCategoryKind().equals("수입")) {
-							%>
-								<input type="radio" name="categoryKind" value="수입" checked>&nbsp;수입
-								&nbsp;
-								<input type="radio" name="categoryKind" value="지출">&nbsp;지출
-							<%
-								} else {
-							%>
-								<input type="radio" name="categoryKind" value="수입">&nbsp;수입
-								&nbsp;
-								<input type="radio" name="categoryKind" value="지출" checked>&nbsp;지출
-							<%	
-								}
-							%>
-						</td>
-						<td><input type="text" style="text-align : center ;"name="categoryName" value="<%=categoryOne.getCategoryName()%>"></td>
-					</tr>
-				</tbody>
-			</table>
-			<div style="text-align : center">
-				<button type="submit" class="w-btn-outline w-btn-blue-outline">카테고리 수정</button>
-			</div>
-		</form>
+	<!-- main start -->	
+	<jsp:include page="/inc/layoutTopAdmin.jsp"></jsp:include>
+	<div class="container px-4">
+		<div class="calendar-fluid shadow bg-white p-4" style="margin-top : 20px">
+			<br>
+			<h2>카테고리수정 페이지</h2>
+			<form action="<%=request.getContextPath()%>/admin/updateCategoryAction.jsp"method="post" id="updateCategoryForm">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td>카테고리 번호</td>
+							<th>수입 / 지출</th>
+							<th>이름</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td><input type="number" style="background-color : pink ;text-align : center ;" name="categoryNo" value="<%=categoryOne.getCategoryNo()%>" readonly="readonly"></td>
+							<td>
+								<%
+									if(categoryOne.getCategoryKind().equals("수입")) {
+								%>
+									<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="수입" checked>&nbsp;수입
+									&nbsp;
+									<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="지출">&nbsp;지출
+								<%
+									} else {
+								%>
+									<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="수입">&nbsp;수입
+									&nbsp;
+									<input type="radio" id="categoryKind" name="categoryKind" class="categoryKind" value="지출" checked>&nbsp;지출
+								<%	
+									}
+								%>
+							</td>
+							<td><input type="text" style="text-align : center ;" id="categoryName" name="categoryName" value="<%=categoryOne.getCategoryName()%>"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="text-align : center">
+					<button type="button" class="w-btn-outline w-btn-blue-outline" id="updateCategoryBtn">카테고리 수정</button>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-<!-- main end -->	
-<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
+	<script>
+			let updateCategoryBtn = document.querySelector('#updateCategoryBtn');
+			
+			updateCategoryBtn.addEventListener('click', function(){
+				
+				let categoryKind = document.querySelectorAll('.categoryKind:checked'); // querySelectorAll의 반환타입은 배열(태그의배열)
+				console.log(categoryKind.length); // 1
+				if(categoryKind.length != 1) {
+					alert('수입/지출을 선택하세요');
+					return;
+				}
+	
+				let categoryName = document.querySelector('#categoryName');
+				if(categoryName.value == '') {
+					alert('카테고리 명을 입력하세요');
+					categoryName.focus(); // 커서이동
+					return;
+				}
+				
+				let updateCategoryForm = document.querySelector('#updateCategoryForm');
+				updateCategoryForm.submit();
+			});
+		</script>
+	
+	<!-- main end -->	
+	<jsp:include page="/inc/layoutBottomAdmin.jsp"></jsp:include>
 </body>
 </html>

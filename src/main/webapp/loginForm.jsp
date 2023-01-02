@@ -27,9 +27,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-<link href="css/styles.css" rel="stylesheet"/>
-<link href="css/calendarcss.css" rel="stylesheet"/>
-<link href="css/fontcss.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath()%>/css/styles.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath()%>/css/calendarcss.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath()%>/css/fontcss.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 <%
@@ -55,20 +55,18 @@
                                 	<!-- 로그인 폼 -->
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
+                                        <form action="<%=request.getContextPath()%>/loginAction.jsp" method="post" id="loginForm">
 									        <div class="form-floating mb-3">
-									            <input class="form-control" id="inputEmail" type="text" name="memberId"/>
+									            <input class="form-control" type="text" id="memberId" name="memberId"/>
 									            <label for="inputEmail">ID</label>
 									        </div>
 									        <div class="form-floating mb-3">
-									            <input class="form-control password" id="inputPassword" type="password" name="memberPw" style="font-family:'궁서체'; font-size:10pt;"/>
+									            <input class="form-control password" type="password" id="memberPw" name="memberPw" style="font-family:'궁서체'; font-size:10pt;"/>
 									            <label for="inputPassword">PW</label>
 									        </div>
 									        
 									        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-									        	<div style="text-align : right">
-									        		 <button type="submit" class="btn btn-primary"><span class="text">Login</span></button>
-									        	</div>
+									        	<button type="button" class="btn btn-primary" id="loginBtn">Login</button>
 									        </div>
 									    </form>
                                     </div>
@@ -125,13 +123,35 @@
 			</div>
 		</div>
     </div>
-        
+    
+    <script>
+		let loginBtn = document.querySelector('#loginBtn');
+		
+		loginBtn.addEventListener('click', function(){
+			
+			let id = document.querySelector('#memberId');
+			if(id.value == '') {
+				alert('아이디를 입력하세요');
+				id.focus(); // 커서이동
+				return;
+			}
+			let pw = document.querySelector('#memberPw');
+			if(pw.value == '') {
+				alert('비밀번호를 입력하세요');
+				pw.focus(); // 커서이동
+				return;
+			}
+			
+			let loginForm = document.querySelector('#loginForm');
+			loginForm.submit();
+		});
+	</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
+	<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-	<script src="js/datatables-simple-demo.js"></script>
+	<script src="<%=request.getContextPath()%>/js/datatables-simple-demo.js"></script>
 </body>
 </html>
