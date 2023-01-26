@@ -57,11 +57,11 @@
                                     <div class="card-body">
                                         <form action="<%=request.getContextPath()%>/loginAction.jsp" method="post" id="loginForm">
 									        <div class="form-floating mb-3">
-									            <input class="form-control" type="text" id="memberId" name="memberId"/>
+									            <input class="form-control" type="text" id="memberId" name="memberId" value="goodee"/>
 									            <label for="inputEmail">ID</label>
 									        </div>
 									        <div class="form-floating mb-3">
-									            <input class="form-control password" type="password" id="memberPw" name="memberPw" style="font-family:'궁서체'; font-size:10pt;"/>
+									            <input class="form-control password" type="password" id="memberPw" name="memberPw" value="1234" style="font-family:'궁서체'; font-size:10pt;"/>
 									            <label for="inputPassword">PW</label>
 									        </div>
 									        
