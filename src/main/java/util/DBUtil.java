@@ -6,7 +6,7 @@ public class DBUtil {
 	public Connection getConnection() throws Exception {
 		// 1. DB 연결
 		String dbDriver = "org.mariadb.jdbc.Driver";
-		String dbUrl = "jdbc:mariadb://localhost:3306/cashbook";
+		String dbUrl = "jdbc:mariadb://3.38.82.69:3306/cashbook";
 		String dbUser = "root";
 		String dbPassword = "java1234";
 		
